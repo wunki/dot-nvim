@@ -1,6 +1,6 @@
 local config = function()
   require("kanagawa").setup({
-    compile = true,
+    compile = false,
     dimInactive = true,
     colors = { theme = { all = { ui = { bg_gutter = "none" } } } },
   })
@@ -10,7 +10,6 @@ end
 return {
   {
     "rebelot/kanagawa.nvim",
-    build = "KanagawaCompile",
     priority = 1000,
     lazy = false,
     config = config,
