@@ -11,7 +11,9 @@ return {
       sections = {
         lualine_a = { "mode" },
         lualine_b = {},
-        lualine_c = { "filename" },
+        lualine_c = {},
+        lualine_y = {},
+        lualine_z = { "filename" },
         lualine_x = {},
       },
     })

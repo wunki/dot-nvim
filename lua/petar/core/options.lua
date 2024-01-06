@@ -3,6 +3,9 @@ local opt = vim.opt -- for conciseness
 -- have one bar per neovim instance
 opt.laststatus = 3
 
+-- since we are using lualine, we don't need to show the mode
+opt.showmode = false
+
 -- line numbers
 opt.relativenumber = true -- show relative line numbers
 opt.number = true -- shows absolute line number on cursor line (when relative number is on)
