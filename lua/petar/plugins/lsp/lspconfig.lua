@@ -93,7 +93,7 @@ return {
       capabilities = capabilities,
       on_attach = on_attach,
       filetypes = { "zig" },
-      cmd = { vim.fn.expand "$HOME/.local/bin/zls" },
+      cmd = { vim.fn.expand("$HOME/.local/bin/zls") },
     })
 
     -- configure lua server (with special settings)

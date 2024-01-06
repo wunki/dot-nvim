@@ -1,8 +1,18 @@
+local config = function()
+  require("kanagawa").setup({
+    compile = true,
+    dimInactive = true,
+    colors = { theme = { all = { ui = { bg_gutter = "none" } } } },
+  })
+  vim.cmd.colorscheme("kanagawa")
+end
+
 return {
-    'AlexvZyl/nordic.nvim',
-    lazy = false,
+  {
+    "rebelot/kanagawa.nvim",
+    build = "KanagawaCompile",
     priority = 1000,
-    config = function()
-        require 'nordic' .load()
-    end
+    lazy = false,
+    config = config,
+  },
 }
