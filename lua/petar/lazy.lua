@@ -15,9 +15,6 @@ require("lazy").setup({
   { import = "petar.plugins" },
   { import = "petar.plugins.lsp" },
 }, {
-  install = {
-    colorscheme = { "embark" },
-  },
   checker = {
     enabled = true,
     notify = false,
