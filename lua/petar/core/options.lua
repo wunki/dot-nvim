@@ -6,6 +6,10 @@ opt.laststatus = 3
 -- since we are using lualine, we don't need to show the mode
 opt.showmode = false
 
+-- persist undo's across sessions
+opt.undofile = true
+opt.undodir = vim.fn.stdpath('config') .. '/undo'
+
 -- line numbers
 opt.relativenumber = true -- show relative line numbers
 opt.number = true -- shows absolute line number on cursor line (when relative number is on)
