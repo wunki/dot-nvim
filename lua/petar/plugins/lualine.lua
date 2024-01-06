@@ -9,11 +9,11 @@ return {
         component_separators = "",
       },
       sections = {
-        lualine_a = { "mode" },
+        lualine_a = { "filename" },
         lualine_b = {},
         lualine_c = {},
         lualine_y = {},
-        lualine_z = { "filename" },
+        lualine_z = { "mode" },
         lualine_x = {},
       },
     })
