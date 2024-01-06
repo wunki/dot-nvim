@@ -1,7 +1,7 @@
 local config = function()
   require("kanagawa").setup({
     compile = false,
-    dimInactive = true,
+    dimInactive = false,
     colors = { theme = { all = { ui = { bg_gutter = "none" } } } },
   })
   vim.cmd.colorscheme("kanagawa")
