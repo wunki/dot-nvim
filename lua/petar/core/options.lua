@@ -10,6 +10,9 @@ opt.showmode = false
 opt.undofile = true
 opt.undodir = vim.fn.stdpath('config') .. '/undo'
 
+-- set Python to homebrew version
+vim.g.python3_host_prog = '/opt/homebrew/bin/python3'
+
 -- line numbers
 opt.relativenumber = true -- show relative line numbers
 opt.number = true -- shows absolute line number on cursor line (when relative number is on)
