@@ -88,12 +88,18 @@ return {
       on_attach = on_attach,
     })
 
-    -- configure ZLS server
+    -- configure zls server
     lspconfig["zls"].setup({
       capabilities = capabilities,
       on_attach = on_attach,
       filetypes = { "zig" },
       cmd = { vim.fn.expand("$HOME/.local/bin/zls") },
+    })
+
+    -- configure clojure server
+    lspconfig["clojure_lsp"].setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
     })
 
     -- configure lua server (with special settings)

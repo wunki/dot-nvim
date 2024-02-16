@@ -39,6 +39,7 @@ return {
           "dockerfile",
           "gitignore",
           "query",
+          "clojure",
           "zig",
           "elixir",
           "heex",
