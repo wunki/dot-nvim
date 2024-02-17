@@ -8,10 +8,10 @@ opt.showmode = false
 
 -- persist undo's across sessions
 opt.undofile = true
-opt.undodir = vim.fn.stdpath('config') .. '/undo'
+opt.undodir = vim.fn.stdpath("config") .. "/undo"
 
 -- set Python to homebrew version
-vim.g.python3_host_prog = '/opt/homebrew/bin/python3'
+vim.g.python3_host_prog = "/opt/homebrew/bin/python3"
 
 -- line numbers
 opt.relativenumber = true -- show relative line numbers
