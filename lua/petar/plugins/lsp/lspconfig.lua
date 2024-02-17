@@ -80,6 +80,13 @@ return {
     lspconfig["cssls"].setup({
       capabilities = capabilities,
       on_attach = on_attach,
+      settings = {
+        css = { validate = true,
+          lint = {
+            unknownAtRules = "ignore"
+          }
+        }
+      }
     })
 
     -- configure tailwindcss server
