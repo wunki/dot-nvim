@@ -36,6 +36,7 @@ return {
           "fish",
           "lua",
           "vim",
+          "vimdoc",
           "dockerfile",
           "gitignore",
           "query",
@@ -43,6 +44,8 @@ return {
           "zig",
           "elixir",
           "heex",
+          "sql",
+          "fennel",
         },
         incremental_selection = {
           enable = true,
