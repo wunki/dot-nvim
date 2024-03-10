@@ -127,6 +127,12 @@ return {
       on_attach = on_attach,
     })
 
+    -- configure go
+    lspconfig["gopls"].setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+    })
+
     -- configure grammarly
     lspconfig["grammarly"].setup({
       capabilities = capabilities,

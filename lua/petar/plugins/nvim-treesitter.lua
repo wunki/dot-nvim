@@ -42,6 +42,7 @@ return {
           "query",
           "clojure",
           "zig",
+          "go",
           "elixir",
           "heex",
           "sql",

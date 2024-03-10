@@ -10,7 +10,12 @@ return {
       },
       sections = {
         lualine_a = { "mode" },
-        lualine_b = {},
+        lualine_b = {
+          {
+            require("grapple").statusline,
+            cond = require("grapple").exists,
+          },
+        },
         lualine_c = {},
         lualine_y = {},
         lualine_z = { "location" },

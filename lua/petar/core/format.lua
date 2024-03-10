@@ -3,9 +3,9 @@ local opt = vim.opt
 -- Max width of 80, so I can easily have split windows.
 opt.textwidth = 80
 
--- Format the buffer for Clojure.
+-- Format the buffer for Go, Clojure and Lua
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-  pattern = "*.clj",
+  pattern = { "*.go", "*.clj", "*.cljs", "*.cljc", "*.edn", "*.lua" },
   callback = function()
     vim.lsp.buf.format()
   end,

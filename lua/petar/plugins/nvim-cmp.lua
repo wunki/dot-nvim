@@ -28,6 +28,11 @@ return {
       return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
     end
 
+    -- check that the current line is empty
+    local is_empty_line = function()
+      return vim.fn.empty(vim.fn.getline("."))
+    end
+
     cmp.setup({
       completion = {
         completeopt = "menu,menuone,preview,noselect",
@@ -65,6 +70,8 @@ return {
             cmp.select_prev_item()
           elseif luasnip.jumpable(-1) then
             luasnip.jump(-1)
+          elseif is_empty_line() then
+            cmp.complete()
           else
             fallback()
           end

@@ -18,10 +18,13 @@ opt.relativenumber = true -- show relative line numbers
 opt.number = true -- shows absolute line number on cursor line (when relative number is on)
 
 -- tabs & indentation
-opt.tabstop = 2 -- 2 spaces for tabs (prettier default)
+opt.tabstop = 2 -- 2 spaces for tabs
 opt.shiftwidth = 2 -- 2 spaces for indent width
 opt.expandtab = true -- expand tab to spaces
 opt.autoindent = true -- copy indent from current line when starting new one
+
+-- in Go, set tabstop and shiftwidth to 4
+vim.cmd("autocmd FileType go setlocal noexpandtab tabstop=4 shiftwidth=4")
 
 -- line wrapping
 opt.wrap = false -- disable line wrapping
