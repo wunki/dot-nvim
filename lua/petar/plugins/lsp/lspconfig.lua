@@ -15,6 +15,7 @@ return {
     local keymap = vim.keymap -- for conciseness
 
     local opts = { noremap = true, silent = true }
+
     local on_attach = function(client, bufnr)
       opts.buffer = bufnr
 
@@ -101,13 +102,26 @@ return {
       cmd = { vim.fn.expand("$HOME/.local/bin/zls") },
     })
 
-    -- configure clojure server
+    -- clojure
+    --
+    -- don't show the LSP warnings in the conjure log buffer
+    vim.api.nvim_create_autocmd("BufNewFile", {
+      desc = "Conjure Log disable LSP diagnostics",
+      pattern = { "conjure-log-*" },
+      callback = function()
+        return vim.diagnostic.disable(0)
+      end,
+      group = vim.api.nvim_create_augroup("conjure_log_disable_lsp", {
+        clear = true,
+      }),
+    })
+
     lspconfig["clojure_lsp"].setup({
       capabilities = capabilities,
       on_attach = on_attach,
     })
 
-    -- configure sql
+    -- sql
     lspconfig["sqls"].setup({
       capabilities = capabilities,
       on_attach = on_attach,
