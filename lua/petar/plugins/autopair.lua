@@ -1,8 +1,8 @@
 return {
-  "windwp/nvim-autopairs",
-  event = "InsertEnter",
+  'windwp/nvim-autopairs',
+  event = 'InsertEnter',
   opts = {
     enable_check_bracket_line = false,
-    ignored_next_char = "",
+    ignored_next_char = '',
   },
 }

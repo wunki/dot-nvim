@@ -1,6 +1,6 @@
 return {
-  "Olical/conjure",
+  'Olical/conjure',
   keys = {
-    { "<localleader>cc", "<cmd>ConjureConnect<cr>", desc = "Connect Conjure to the Repl" },
+    { '<localleader>cc', '<cmd>ConjureConnect<cr>', desc = 'Connect Conjure to the Repl' },
   },
 }

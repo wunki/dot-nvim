@@ -1,2 +1,2 @@
-require("petar.core")
-require("petar.lazy")
+require 'petar.core'
+require 'petar.lazy'

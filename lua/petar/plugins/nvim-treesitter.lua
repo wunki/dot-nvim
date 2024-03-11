@@ -1,18 +1,18 @@
 return {
   {
-    "nvim-treesitter/nvim-treesitter",
-    event = { "BufReadPre", "BufNewFile" },
-    build = ":TSUpdate",
+    'nvim-treesitter/nvim-treesitter',
+    event = { 'BufReadPre', 'BufNewFile' },
+    build = ':TSUpdate',
     dependencies = {
-      "nvim-treesitter/nvim-treesitter-textobjects",
-      "windwp/nvim-ts-autotag",
+      'nvim-treesitter/nvim-treesitter-textobjects',
+      'windwp/nvim-ts-autotag',
     },
     config = function()
       -- import nvim-treesitter plugin
-      local treesitter = require("nvim-treesitter.configs")
+      local treesitter = require 'nvim-treesitter.configs'
 
       -- configure treesitter
-      treesitter.setup({ -- enable syntax highlighting
+      treesitter.setup { -- enable syntax highlighting
         highlight = {
           enable = true,
         },
@@ -24,40 +24,40 @@ return {
         },
         -- ensure these language parsers are installed
         ensure_installed = {
-          "json",
-          "javascript",
-          "typescript",
-          "yaml",
-          "html",
-          "css",
-          "markdown",
-          "markdown_inline",
-          "bash",
-          "fish",
-          "lua",
-          "vim",
-          "vimdoc",
-          "dockerfile",
-          "gitignore",
-          "query",
-          "clojure",
-          "zig",
-          "go",
-          "elixir",
-          "heex",
-          "sql",
-          "fennel",
+          'json',
+          'javascript',
+          'typescript',
+          'yaml',
+          'html',
+          'css',
+          'markdown',
+          'markdown_inline',
+          'bash',
+          'fish',
+          'lua',
+          'vim',
+          'vimdoc',
+          'dockerfile',
+          'gitignore',
+          'query',
+          'clojure',
+          'zig',
+          'go',
+          'elixir',
+          'heex',
+          'sql',
+          'fennel',
         },
         incremental_selection = {
           enable = true,
           keymaps = {
-            init_selection = "<C-space>",
-            node_incremental = "<C-space>",
+            init_selection = '<C-space>',
+            node_incremental = '<C-space>',
             scope_incremental = false,
-            node_decremental = "<bs>",
+            node_decremental = '<bs>',
           },
         },
-      })
+      }
     end,
   },
 }

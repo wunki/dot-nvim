@@ -1,8 +1,8 @@
 return {
   {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    build = ":Copilot auth",
+    'zbirenbaum/copilot.lua',
+    cmd = 'Copilot',
+    build = ':Copilot auth',
     opts = {
       suggestion = { enabled = false },
       panel = { enabled = false },
@@ -13,9 +13,9 @@ return {
     },
   },
   {
-    "zbirenbaum/copilot-cmp",
+    'zbirenbaum/copilot-cmp',
     config = function()
-      require("copilot_cmp").setup()
+      require('copilot_cmp').setup()
     end,
   },
 }
