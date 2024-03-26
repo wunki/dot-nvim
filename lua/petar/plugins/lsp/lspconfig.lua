@@ -58,6 +58,11 @@ return {
 
       opts.desc = 'Restart LSP'
       keymap.set('n', '<leader>rs', ':LspRestart<CR>', opts) -- mapping to restart lsp if necessary
+
+      -- disable semantic highlighting for Zig (ZLS)
+      if client.name == 'zls' then
+        -- client.server_capabilities.semanticTokensProvider = nil
+      end
     end
 
     -- used to enable autocompletion (assign to every lsp server config)
