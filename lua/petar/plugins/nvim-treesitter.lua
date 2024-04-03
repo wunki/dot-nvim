@@ -43,6 +43,7 @@ return {
           'clojure',
           'zig',
           'go',
+          'rust',
           'elixir',
           'heex',
           'sql',
