@@ -15,12 +15,15 @@ vim.g.python3_host_prog = '/opt/homebrew/bin/python3'
 
 -- line numbers
 opt.relativenumber = true -- show relative line numbers
-opt.number = true -- shows absolute line number on cursor line (when relative number is on)
+opt.number = true         -- shows absolute line number on cursor line (when relative number is on)
+
+-- hide the startup message
+opt.shortmess = "I"
 
 -- tabs & indentation
-opt.tabstop = 2 -- 2 spaces for tabs
-opt.shiftwidth = 2 -- 2 spaces for indent width
-opt.expandtab = true -- expand tab to spaces
+opt.tabstop = 2       -- 2 spaces for tabs
+opt.shiftwidth = 2    -- 2 spaces for indent width
+opt.expandtab = true  -- expand tab to spaces
 opt.autoindent = true -- copy indent from current line when starting new one
 
 -- in Go, set tabstop and shiftwidth to 4
@@ -31,7 +34,7 @@ opt.wrap = false -- disable line wrapping
 
 -- search settings
 opt.ignorecase = true -- ignore case when searching
-opt.smartcase = true -- if you include mixed case in your search, assumes you want case-sensitive
+opt.smartcase = true  -- if you include mixed case in your search, assumes you want case-sensitive
 
 -- cursor line
 opt.cursorline = true -- highlight the current cursor line
@@ -39,7 +42,7 @@ opt.cursorline = true -- highlight the current cursor line
 -- appearance
 opt.termguicolors = true
 opt.background = 'dark' -- colorschemes that can be light or dark will be made dark
-opt.signcolumn = 'yes' -- show sign column so that text doesn't shift
+opt.signcolumn = 'yes'  -- show sign column so that text doesn't shift
 
 -- gui, like Neovide
 opt.guifont = 'Berkeley Mono:h12'

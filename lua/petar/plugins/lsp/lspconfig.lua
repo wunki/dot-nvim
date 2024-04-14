@@ -19,6 +19,11 @@ return {
     local on_attach = function(client, bufnr)
       opts.buffer = bufnr
 
+      -- enable inlay hints
+      if client.server_capabilities.inlayHintProvider then
+        vim.lsp.inlay_hint.enable(bufnr, true)
+      end
+
       -- set keybinds
       opts.desc = 'Show LSP references'
       keymap.set('n', 'gR', '<cmd>Telescope lsp_references<CR>', opts) -- show definition, references
@@ -58,11 +63,6 @@ return {
 
       opts.desc = 'Restart LSP'
       keymap.set('n', '<leader>rs', ':LspRestart<CR>', opts) -- mapping to restart lsp if necessary
-
-      -- disable semantic highlighting for Zig (ZLS)
-      if client.name == 'zls' then
-        -- client.server_capabilities.semanticTokensProvider = nil
-      end
     end
 
     -- used to enable autocompletion (assign to every lsp server config)
@@ -104,7 +104,7 @@ return {
       capabilities = capabilities,
       on_attach = on_attach,
       filetypes = { 'zig' },
-      cmd = { vim.fn.expand '$HOME/.local/bin/zls' },
+      cmd = { vim.fn.expand '$HOME/.local/bin/zls-master' },
     }
 
     -- clojure
