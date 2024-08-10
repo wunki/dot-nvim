@@ -5,7 +5,7 @@ opt.textwidth = 80
 
 -- Format the buffer for Go, Clojure and Lua
 vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
-  pattern = { '*.go', '*.clj', '*.cljs', '*.cljc', '*.edn', '*.lua' },
+  pattern = { '*.go', '*.clj', '*.cljs', '*.cljc', '*.edn', '*.lua', '*.ex', "*.heex" },
   callback = function()
     vim.lsp.buf.format()
   end,

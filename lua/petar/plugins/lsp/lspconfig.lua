@@ -21,7 +21,7 @@ return {
 
       -- enable inlay hints
       if client.server_capabilities.inlayHintProvider then
-        vim.lsp.inlay_hint.enable(bufnr, true)
+        vim.lsp.inlay_hint.enable(true)
       end
 
       -- set keybinds
@@ -104,7 +104,7 @@ return {
       capabilities = capabilities,
       on_attach = on_attach,
       filetypes = { 'zig' },
-      cmd = { vim.fn.expand '$HOME/.local/bin/zls-master' },
+      cmd = { vim.fn.expand '$HOME/.zvm/bin/zls' },
     }
 
     -- clojure
