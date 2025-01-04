@@ -1,8 +1,14 @@
--- TODO: can't get the mini.icons icons to actually show up.
 return {
   "ibhagwan/fzf-lua",
-  dependencies = { "echasnovski/mini.icons" },
-  config = function()
+  opts = {
+    defaults = {
+      header = false,    -- don't show header
+      file_icons = false -- don't use any file icons
+    }
+  },
+  config = function(_, opts)
+    require("fzf-lua").setup(opts)
+
     -- to check which commands are available, run the `FzfLua builtin` command.
     -- find files in current directory
     vim.keymap.set("n", "<space>fd", require("fzf-lua").files)
