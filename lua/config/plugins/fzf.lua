@@ -1,3 +1,4 @@
+-- TODO: can't get the mini.icons icons to actually show up.
 return {
   "ibhagwan/fzf-lua",
   dependencies = { "echasnovski/mini.icons" },
@@ -14,6 +15,9 @@ return {
     end)
 
     -- colorschemes
-    vim.keymap.set("n", "<space>cs", require('fzf-lua').colorschemes)
+    vim.keymap.set("n", "<space>fc", require('fzf-lua').colorschemes)
+
+    -- help tags
+    vim.keymap.set("n", "<space>fh", require('fzf-lua').help_tags)
   end
 }
