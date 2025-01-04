@@ -6,6 +6,10 @@ return {
       statusline.setup {
         use_icons = true
       }
+
+
+      local files = require 'mini.files'
+      files.setup {}
     end
   }
 }
