@@ -6,6 +6,7 @@ return {
     flavour = "mocha",
     color_overrides = {
       mocha = {
+        -- TODO: darker color is now equal to the base, not good.
         base = "#181825",
       },
     },
