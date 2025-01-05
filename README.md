@@ -4,8 +4,8 @@ This is my minimal Neovim configuration.
 
 ## Key bindings
 
-| Key              | Description                        |
-|------------------|------------------------------------|
-| <kbd><space>ff</kbd> | Find files in CWD                |
-| <kbd><space>fd</kbd> | Open files in dotfiles directory |
-| <kbd><space>fc</kbd> | Open Neovim config files         |
+| Key                 | Description                        |
+|---------------------|------------------------------------|
+| <kbd>Space</kbd> <kbd>ff</kbd> | Find files in CWD                |
+| <kbd>Space</kbd> <kbd>fd</kbd> | Open files in dotfiles directory |
+| <kbd>Space</kbd> <kbd>fc</kbd> | Open Neovim config files         |
