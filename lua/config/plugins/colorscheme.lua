@@ -6,6 +6,7 @@ return {
     flavour = "mocha",
     no_italic = true,
     color_overrides = {
+      -- make it a little bit darker
       mocha = {
         base = "#181825",
         mantle = "#11111b",
