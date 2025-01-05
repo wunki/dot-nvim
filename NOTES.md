@@ -3,7 +3,9 @@
 ## Tasks
 
 - [ ] Move keybindings for FZF to Lazy.
-- [ ] Install markdown.nvim and LSP for Markdown.
+- [ ] Setup Markdown
+    - [x] Setup [render-markdown.nvim](https://github.com/MeanderingProgrammer/render-markdown.nvim)
+    - [x] Setup lsp for Markdown
 - [ ] Watch Lua video from TJ.
 
 ## Sunday, January 5

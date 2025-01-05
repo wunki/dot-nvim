@@ -7,5 +7,6 @@
   "lazydev.nvim": { "branch": "main", "commit": "8620f82ee3f59ff2187647167b6b47387a13a018" },
   "mini.nvim": { "branch": "main", "commit": "f968becf44b05d8c54d4fa95c9ca699df4de363b" },
   "nvim-lspconfig": { "branch": "master", "commit": "f4ed656e876e45cf914d7beb972830561178e232" },
-  "nvim-treesitter": { "branch": "master", "commit": "556ac68cd33973a38d3f2abac47f361432593fe2" }
+  "nvim-treesitter": { "branch": "master", "commit": "556ac68cd33973a38d3f2abac47f361432593fe2" },
+  "render-markdown.nvim": { "branch": "main", "commit": "16369540a005ad0cf267498162aedca6dfca1b9c" }
 }
