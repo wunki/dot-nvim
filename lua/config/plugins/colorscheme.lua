@@ -4,10 +4,12 @@ return {
   priority = 1000,
   opts = {
     flavour = "mocha",
+    no_italic = true,
     color_overrides = {
       mocha = {
-        -- TODO: darker color is now equal to the base, not good.
         base = "#181825",
+        mantle = "#11111b",
+        crust = "#08080f",
       },
     },
   },
