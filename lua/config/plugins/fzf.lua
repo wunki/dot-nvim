@@ -9,21 +9,27 @@ return {
   config = function(_, opts)
     require("fzf-lua").setup(opts)
 
-    -- to check which commands are available, run the `FzfLua builtin` command.
-    -- find files in current directory
-    vim.keymap.set("n", "<space>fd", require("fzf-lua").files)
+    ---
+    --- to check which commands are available, run the `FzfLua builtin' command.
+    ---
+    --- find files in current directory
+    vim.keymap.set("n", "<space>ff", require("fzf-lua").files)
 
-    -- find files in my neovim configuration
-    vim.keymap.set("n", "<space>en", function()
+    --- find my neovim config files
+    vim.keymap.set("n", "<space>fc", function()
       require("fzf-lua").files({
         cwd = vim.fn.stdpath("config"),
       })
     end)
 
-    -- colorschemes
-    vim.keymap.set("n", "<space>fc", require("fzf-lua").colorschemes)
+    --- find my dotfiles
+    vim.keymap.set("n", "<space>fd", function()
+      require("fzf-lua").files({
+        cwd = vim.fn.expand("~/code/dotfiles")
+      })
+    end)
 
-    -- help tags
+    --- help tags
     vim.keymap.set("n", "<space>fh", require("fzf-lua").help_tags)
   end,
 }

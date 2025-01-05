@@ -2,7 +2,11 @@ require("config.lazy")
 
 vim.opt.shiftwidth = 4
 vim.opt.clipboard = "unnamedplus" -- global clipboard
-vim.opt.shortmess:append("I") -- no startup message
+vim.opt.shortmess:append("I")     -- no startup message
+
+--- do we want line numbers?
+vim.opt.number = false
+vim.opt.relativenumber = false
 
 --- KEYBINDINGS
 --- execute the current line

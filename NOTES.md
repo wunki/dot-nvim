@@ -6,12 +6,15 @@
 - [ ] Enable FZF for grepping files.
 - [ ] Setup Markdown
     - [x] Setup [render-markdown.nvim](https://github.com/MeanderingProgrammer/render-markdown.nvim)
-    - [] Setup lsp for Markdown
-- [ ] Watch Lua video from TJ.
+    - [ ] Setup lsp for Markdown
+- [ ] Setup Svelte
+- [ ] Watch [Lua introduction video](https://www.youtube.com/watch?v=CuWfgiwI73Q) from TJ.
 
 ## Sunday, January 5
 
-Learned to use `vim.notify` for notification messages.
+Learned to use `vim.notify` for notification messages. Testing out if I want line numbers at all.
+
+How do I know that TS grammar is working in a buffer?
 
 ## Saturday, January 4
 
