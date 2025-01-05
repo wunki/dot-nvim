@@ -2,7 +2,7 @@ return {
   "ibhagwan/fzf-lua",
   opts = {
     defaults = {
-      header = false, -- don't show header
+      header = false,     -- don't show header
       file_icons = false, -- don't use any file icons
     },
   },

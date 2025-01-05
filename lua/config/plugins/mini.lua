@@ -20,7 +20,7 @@ return {
 
       -- files
       local files = require("mini.files")
-      files.setup({})
+      files.setup()
     end,
   },
 }
