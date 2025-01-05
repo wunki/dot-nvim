@@ -31,5 +31,8 @@ return {
 
     --- help tags
     vim.keymap.set("n", "<space>fh", require("fzf-lua").help_tags)
+
+    --- grep
+    vim.keymap.set("n", "<space>fg", require("fzf-lua").live_grep)
   end,
 }
