@@ -15,11 +15,16 @@ return {
       },
     },
     config = function()
-      -- let the lsp know of blink's capabilities
+      -- blink autocompletion capabilities
       local capabilities = require("blink.cmp").get_lsp_capabilities()
+
+      --- lua
       require("lspconfig").lua_ls.setup({ capabilities = capabilities })
 
-      -- setup formatting on save for every lsp that supports it.
+      --- typescript
+      require("lspconfig").ts_ls.setup({ capabilities = capabilities })
+
+      --- setup formatting on save for every lsp that supports it.
       vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(args)
           local client = vim.lsp.get_client_by_id(args.data.client_id)
@@ -27,7 +32,7 @@ return {
             return
           end
 
-          ---@diagnostic disable-next-line: missing-parameter
+          --- @diagnostic disable-next-line: missing-parameter
           if client.supports_method("textDocument/formatting") then
             vim.api.nvim_create_autocmd("BufWritePre", {
               buffer = args.buf,
