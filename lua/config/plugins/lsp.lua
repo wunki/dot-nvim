@@ -1,6 +1,7 @@
 return {
   {
     'neovim/nvim-lspconfig',
+
     -- sane configuration for Lua
     dependencies = {
       { 'j-hui/fidget.nvim', opts = {} }, -- useful notifcations
