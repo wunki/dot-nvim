@@ -19,6 +19,7 @@ return {
           'tsx',
           'html',
           'markdown',
+          'astro',
         },
         auto_install = false,
         highlight = {

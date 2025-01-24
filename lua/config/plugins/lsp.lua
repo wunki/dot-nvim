@@ -5,7 +5,7 @@ return {
     -- sane configuration for Lua
     dependencies = {
       { 'j-hui/fidget.nvim', opts = {} }, -- useful notifcations
-      'saghen/blink.cmp', -- autocompletion
+      'saghen/blink.cmp',                 -- autocompletion
       {
         'folke/lazydev.nvim',
         ft = 'lua',

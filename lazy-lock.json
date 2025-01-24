@@ -3,11 +3,11 @@
   "catppuccin": { "branch": "main", "commit": "f67b886d65a029f12ffa298701fb8f1efd89295d" },
   "fidget.nvim": { "branch": "main", "commit": "a0abbf18084b77d28bc70e24752e4f4fd54aea17" },
   "friendly-snippets": { "branch": "main", "commit": "efff286dd74c22f731cdec26a70b46e5b203c619" },
-  "fzf-lua": { "branch": "main", "commit": "e59fac8ac4188984a2b69d4a7d1375ccb866dbbb" },
+  "fzf-lua": { "branch": "main", "commit": "ff10649d80ba5f518bd66cb1e36e67d2632d0349" },
   "lazy.nvim": { "branch": "main", "commit": "d8f26efd456190241afd1b0f5235fe6fdba13d4a" },
-  "lazydev.nvim": { "branch": "main", "commit": "8620f82ee3f59ff2187647167b6b47387a13a018" },
-  "mini.nvim": { "branch": "main", "commit": "9e603a31d3fbc7ee61c9b556cd84e97fa2dcff53" },
-  "nvim-lspconfig": { "branch": "master", "commit": "339ccc81e08793c3af9b83882a6ebd90c9cc0d3b" },
-  "nvim-treesitter": { "branch": "master", "commit": "f0c928dbe93533b7e35894a8f957f40150d1f663" },
-  "render-markdown.nvim": { "branch": "main", "commit": "f0eb5893556200e9f945c0f0ea3c83bbd20dd963" }
+  "lazydev.nvim": { "branch": "main", "commit": "a1b78b2ac6f978c72e76ea90ae92a94edf380cfc" },
+  "mini.nvim": { "branch": "main", "commit": "f90b6b820062fc06d6d51ed61a0f9b7f9a13b01b" },
+  "nvim-lspconfig": { "branch": "master", "commit": "b4d65bce97795438ab6e1974b3672c17a4865e3c" },
+  "nvim-treesitter": { "branch": "master", "commit": "51562d44fc6280f92bb9a3d87e7b3cb327377ca5" },
+  "render-markdown.nvim": { "branch": "main", "commit": "ad055861d17afe058bd835e82292e14a64b51b1d" }
 }
