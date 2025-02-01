@@ -20,6 +20,7 @@ return {
           'html',
           'markdown',
           'astro',
+          'svelte',
         },
         auto_install = false,
         highlight = {

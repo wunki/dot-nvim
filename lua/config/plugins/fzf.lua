@@ -3,7 +3,7 @@ return {
   event = 'VimEnter',
   opts = {
     defaults = {
-      header = false, -- don't show header
+      header = false,     -- don't show header
       file_icons = false, -- don't use any file icons
     },
   },
@@ -14,7 +14,7 @@ return {
     --- to check which commands are available, run the `FzfLua builtin' command.
     ---
     --- find files in current directory
-    vim.keymap.set('n', '<space>ff', require('fzf-lua').files)
+    vim.keymap.set('n', '<space>ff', require('fzf-lua').git_files)
 
     --- find my neovim config files
     vim.keymap.set('n', '<space>fc', function()
