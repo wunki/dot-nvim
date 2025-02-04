@@ -22,15 +22,15 @@ return {
     end,
   },
   {
-    "rose-pine/neovim",
+    'rose-pine/neovim',
     enabled = false,
-    name = "rose-pine",
+    name = 'rose-pine',
     config = function()
-      vim.cmd("colorscheme rose-pine")
-    end
+      vim.cmd 'colorscheme rose-pine'
+    end,
   },
   {
-    "EdenEast/nightfox.nvim",
+    'EdenEast/nightfox.nvim',
     enabled = false,
     opts = {},
     config = function(_, opts)
@@ -39,12 +39,12 @@ return {
     end,
   },
   {
-    "xero/miasma.nvim",
+    'xero/miasma.nvim',
     enabled = false,
     lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd("colorscheme miasma")
+      vim.cmd 'colorscheme miasma'
     end,
   },
   {
@@ -54,7 +54,8 @@ return {
     config = function()
       vim.g.gruvbox_material_enable_italic = true
       vim.g.gruvbox_material_background = 'hard'
-      vim.cmd.colorscheme('gruvbox-material')
-    end
-  }
+      vim.g.gruvbox_material_float_style = 'dim'
+      vim.cmd.colorscheme 'gruvbox-material'
+    end,
+  },
 }
