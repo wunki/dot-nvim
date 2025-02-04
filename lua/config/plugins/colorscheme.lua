@@ -2,6 +2,7 @@ return {
   {
     'catppuccin/nvim',
     name = 'catppuccin',
+    enabled = false,
     priority = 1000,
     opts = {
       flavour = 'latte',
@@ -21,11 +22,39 @@ return {
     end,
   },
   {
+    "rose-pine/neovim",
+    enabled = false,
+    name = "rose-pine",
+    config = function()
+      vim.cmd("colorscheme rose-pine")
+    end
+  },
+  {
     "EdenEast/nightfox.nvim",
+    enabled = false,
     opts = {},
     config = function(_, opts)
       require('nightfox').setup(opts)
       vim.cmd.colorscheme 'dayfox'
     end,
+  },
+  {
+    "xero/miasma.nvim",
+    enabled = false,
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.cmd("colorscheme miasma")
+    end,
+  },
+  {
+    'sainnhe/gruvbox-material',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.g.gruvbox_material_enable_italic = true
+      vim.g.gruvbox_material_background = 'hard'
+      vim.cmd.colorscheme('gruvbox-material')
+    end
   }
 }
