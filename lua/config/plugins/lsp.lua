@@ -30,12 +30,12 @@ return {
       require('lspconfig').clangd.setup { capabilities = capabilities }
 
       -- svelte
-      require 'lspconfig'.svelte.setup { capabilities = capabilities }
+      require('lspconfig').svelte.setup { capabilities = capabilities }
 
       -- elixir
-      require 'lspconfig'.elixirls.setup {
+      require('lspconfig').elixirls.setup {
         capabilities = capabilities,
-        cmd = { "/Users/petar/.local/bin/elixir-ls" },
+        cmd = { '/Users/petar/.local/bin/elixir-ls' },
       }
 
       -- setup formatting on save for every lsp that supports it.
@@ -49,6 +49,13 @@ return {
 
           -- custom mappings
           map('gd', require('fzf-lua').lsp_definitions, '[G]oto [D]efinition')
+
+          -- these are now the default mappings in HEAD
+          map('grn', vim.lsp.buf.rename, 'Rename')
+          map('gra', vim.lsp.buf.code_action, 'Code Action', { 'n', 'v' })
+          map('grr', vim.lsp.buf.references, 'References')
+          map('gri', vim.lsp.buf.implementation, 'Implementation')
+          map('gO', vim.lsp.buf.document_symbol, 'Document Symbol')
 
           local client = vim.lsp.get_client_by_id(args.data.client_id)
           if not client then
