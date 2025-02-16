@@ -14,7 +14,7 @@ return {
     --- to check which commands are available, run the `FzfLua builtin' command.
     ---
     --- find files in current directory
-    vim.keymap.set('n', '<space>ff', require('fzf-lua').git_files)
+    vim.keymap.set('n', '<space>ff', require('fzf-lua').files)
 
     --- find my neovim config files
     vim.keymap.set('n', '<space>fc', function()

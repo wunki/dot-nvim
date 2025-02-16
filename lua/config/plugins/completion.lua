@@ -11,6 +11,10 @@ return {
       menu = {
         auto_show = false,
       },
+      documentation = {
+        auto_show = true,
+        auto_show_delay_ms = 200,
+      },
     },
 
     -- we don't polute the buffer and only trigger
@@ -33,8 +37,9 @@ return {
 
     sources = {
       default = { 'lsp', 'path', 'snippets', 'buffer' },
-      --- disable cmdline completions
-      cmdline = {},
+    },
+    cmdline = {
+      enabled = false,
     },
   },
   opts_extend = { 'sources.default' },

@@ -8,7 +8,6 @@ return {
       css = { 'prettierd', 'prettier', stop_after_first = true },
       svelte = { 'prettierd', 'prettier', stop_after_first = true },
       json = { 'prettierd', 'prettier', stop_after_first = true },
-      lua = { 'stylua' },
       fish = { 'fish_indent' },
       sh = { 'shfmt' },
       lua = { 'stylua' },
