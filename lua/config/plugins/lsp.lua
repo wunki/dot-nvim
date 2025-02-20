@@ -35,7 +35,7 @@ return {
       -- elixir
       require('lspconfig').elixirls.setup {
         capabilities = capabilities,
-        cmd = { '/Users/petar/.local/bin/elixir-ls' },
+        cmd = { vim.fn.expand('~/.local/share/elixir-ls/language_server.sh') },
       }
 
       -- setup formatting on save for every lsp that supports it.
