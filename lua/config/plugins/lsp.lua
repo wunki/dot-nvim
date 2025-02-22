@@ -24,7 +24,23 @@ return {
       require('lspconfig').lua_ls.setup { capabilities = capabilities }
 
       -- typescript
-      require('lspconfig').ts_ls.setup { capabilities = capabilities }
+      -- require('lspconfig').ts_ls.setup { capabilities = capabilities }
+
+      -- deno
+      require('lspconfig').denols.setup {
+        cmd = { 'deno', 'lsp' },
+        root_dir = require('lspconfig').util.root_pattern('deno.json', 'deno.jsonc'),
+        single_file_support = false,
+        settings = {
+          deno = {
+            enable = true,
+            lint = true,
+            unstable = true,
+            suggest_imports = true,
+          },
+        },
+        capabilities = capabilities,
+      }
 
       -- C
       require('lspconfig').clangd.setup { capabilities = capabilities }
@@ -35,7 +51,7 @@ return {
       -- elixir
       require('lspconfig').elixirls.setup {
         capabilities = capabilities,
-        cmd = { vim.fn.expand('~/.local/share/elixir-ls/language_server.sh') },
+        cmd = { vim.fn.expand '~/.local/share/elixir-ls/language_server.sh' },
       }
 
       -- setup formatting on save for every lsp that supports it.
@@ -56,21 +72,6 @@ return {
           map('grr', vim.lsp.buf.references, 'References')
           map('gri', vim.lsp.buf.implementation, 'Implementation')
           map('gO', vim.lsp.buf.document_symbol, 'Document Symbol')
-
-          local client = vim.lsp.get_client_by_id(args.data.client_id)
-          if not client then
-            return
-          end
-
-          -- @diagnostic disable-next-line: missing-parameter
-          if client.supports_method 'textDocument/formatting' then
-            vim.api.nvim_create_autocmd('BufWritePre', {
-              buffer = args.buf,
-              callback = function()
-                vim.lsp.buf.format { bufnr = args.buf, id = client.id }
-              end,
-            })
-          end
         end,
       })
 
