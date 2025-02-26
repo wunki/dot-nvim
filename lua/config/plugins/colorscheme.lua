@@ -53,8 +53,10 @@ return {
     priority = 1000,
     config = function()
       vim.g.gruvbox_material_enable_italic = true
+      vim.g.gruvbox_material_enable_bold = false
       vim.g.gruvbox_material_background = 'hard'
       vim.g.gruvbox_material_float_style = 'dim'
+      vim.g.gruvbox_material_visual = 'green background'
       vim.cmd.colorscheme 'gruvbox-material'
     end,
   },
