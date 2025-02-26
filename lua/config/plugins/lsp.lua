@@ -5,7 +5,7 @@ return {
     -- sane configuration for Lua
     dependencies = {
       { 'j-hui/fidget.nvim', opts = {} }, -- useful notifcations
-      'saghen/blink.cmp',                 -- autocompletion
+      'saghen/blink.cmp', -- autocompletion
       {
         'folke/lazydev.nvim',
         ft = 'lua',
@@ -24,9 +24,10 @@ return {
       require('lspconfig').lua_ls.setup { capabilities = capabilities }
 
       -- typescript
-      -- require('lspconfig').ts_ls.setup { capabilities = capabilities }
+      require('lspconfig').ts_ls.setup { capabilities = capabilities }
 
-      -- deno
+      -- Deno
+      --[[
       require('lspconfig').denols.setup {
         cmd = { 'deno', 'lsp' },
         root_dir = require('lspconfig').util.root_pattern('deno.json', 'deno.jsonc'),
@@ -41,6 +42,7 @@ return {
         },
         capabilities = capabilities,
       }
+      ]]
 
       -- C
       require('lspconfig').clangd.setup { capabilities = capabilities }
