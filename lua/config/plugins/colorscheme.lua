@@ -49,6 +49,7 @@ return {
   },
   {
     'sainnhe/gruvbox-material',
+    enabled = false,
     lazy = false,
     priority = 1000,
     config = function()
@@ -57,7 +58,32 @@ return {
       vim.g.gruvbox_material_background = 'hard'
       vim.g.gruvbox_material_float_style = 'dim'
       vim.g.gruvbox_material_visual = 'green background'
+    end,
+    init = function()
       vim.cmd.colorscheme 'gruvbox-material'
+    end,
+  },
+  {
+    'olivercederborg/poimandres.nvim',
+    enabled = false,
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require('poimandres').setup {
+        -- options here?
+      }
+    end,
+    init = function()
+      vim.cmd 'colorscheme poimandres'
+    end,
+  },
+  {
+    'folke/tokyonight.nvim',
+    lazy = false,
+    priority = 1000,
+    opts = {},
+    init = function()
+      vim.cmd 'colorscheme tokyonight-night'
     end,
   },
 }
