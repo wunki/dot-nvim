@@ -21,7 +21,13 @@ vim.opt.splitbelow = true
 
 -- show certain whitespace characters in the editor.
 vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.opt.listchars = {
+  trail = '·', -- Highlight trailing whitespace
+  extends = '»', -- Highlight text extending beyond window
+  precedes = '«', -- Highlight text preceding the window
+  nbsp = '␣', -- Highlight non-breaking spaces
+  tab = '  ', -- Hide tab characters
+}
 
 -- no startup message
 vim.opt.shortmess:append 'I'
