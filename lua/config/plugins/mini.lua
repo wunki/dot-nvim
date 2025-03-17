@@ -21,6 +21,10 @@ return {
       -- files
       local files = require 'mini.files'
       files.setup()
+
+      -- comment
+      local comment = require 'mini.comment'
+      comment.setup()
     end,
   },
 }
