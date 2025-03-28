@@ -24,7 +24,22 @@ return {
       require('lspconfig').lua_ls.setup { capabilities = capabilities }
 
       -- typescript
-      require('lspconfig').ts_ls.setup { capabilities = capabilities }
+      require('lspconfig').ts_ls.setup {
+        init_options = {
+          plugins = {
+            {
+              name = '@vue/typescript-plugin',
+              location = vim.fn.expand '~/.local/share/pnpm/vue-language-server',
+              languages = { 'vue' },
+            },
+          },
+        },
+        filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+        capabilities = capabilities,
+      }
+
+      -- volar, required for Vue
+      require('lspconfig').volar.setup { capabilities = capabilities }
 
       -- Deno
       --[[
