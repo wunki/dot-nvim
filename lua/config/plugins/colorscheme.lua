@@ -49,7 +49,7 @@ return {
   },
   {
     'sainnhe/gruvbox-material',
-    enabled = true,
+    enabled = false,
     lazy = false,
     priority = 1000,
     config = function()
@@ -85,6 +85,19 @@ return {
     opts = {},
     init = function()
       vim.cmd 'colorscheme tokyonight-night'
+    end,
+  },
+  {
+    'ficcdaf/ashen.nvim',
+    enabled = true,
+    tag = 'v0.11.0',
+    lazy = false,
+    priority = 1000,
+    opts = {
+      -- your settings here
+    },
+    init = function()
+      vim.cmd 'colorscheme ashen'
     end,
   },
 }

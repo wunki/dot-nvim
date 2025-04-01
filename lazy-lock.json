@@ -1,4 +1,5 @@
 {
+  "ashen.nvim": { "branch": "main", "commit": "a7eaa17c83fe9424429b9ac4f41c9c590d18b787" },
   "blink.cmp": { "branch": "main", "commit": "4607923f60029f8cb28e6950a078f93fd33e1288" },
   "conform.nvim": { "branch": "master", "commit": "f9ef25a7ef00267b7d13bfc00b0dea22d78702d5" },
   "fidget.nvim": { "branch": "main", "commit": "d9ba6b7bfe29b3119a610892af67602641da778e" },
