@@ -49,7 +49,7 @@ return {
   },
   {
     'sainnhe/gruvbox-material',
-    enabled = false,
+    enabled = true,
     lazy = false,
     priority = 1000,
     config = function()
@@ -64,20 +64,6 @@ return {
     end,
   },
   {
-    'olivercederborg/poimandres.nvim',
-    enabled = false,
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require('poimandres').setup {
-        -- options here?
-      }
-    end,
-    init = function()
-      vim.cmd 'colorscheme poimandres'
-    end,
-  },
-  {
     'folke/tokyonight.nvim',
     enabled = false,
     lazy = false,
@@ -89,7 +75,7 @@ return {
   },
   {
     'ficcdaf/ashen.nvim',
-    enabled = true,
+    enabled = false,
     tag = 'v0.11.0',
     lazy = false,
     priority = 1000,
