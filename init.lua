@@ -32,6 +32,9 @@ vim.opt.listchars = {
 -- no startup message
 vim.opt.shortmess:append 'I'
 
+-- 24 bit colors
+vim.opt.termguicolors = true
+
 -- do we want line numbers? Neh...
 vim.opt.number = false
 vim.opt.relativenumber = false
