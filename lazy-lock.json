@@ -1,54 +1,20 @@
 {
-  "ashen.nvim": { "branch": "main", "commit": "a7eaa17c83fe9424429b9ac4f41c9c590d18b787" },
   "blink.cmp": { "branch": "main", "commit": "cb5e346d9e0efa7a3eee7fd4da0b690c48d2a98e" },
-<<<<<<< HEAD
-  "conform.nvim": { "branch": "master", "commit": "b1a75324ddf96b7bb84963a297b1ed334db087c0" },
-||||||| parent of 2da8091 (chore: update lazy-lock.json and colorscheme config)
-  "blink.cmp": { "branch": "main", "commit": "49f211fe5d729df53df4c042d7c3464cf47d199e" },
-  "conform.nvim": { "branch": "master", "commit": "b1a75324ddf96b7bb84963a297b1ed334db087c0" },
-=======
   "conform.nvim": { "branch": "master", "commit": "eebc724d12c5579d733d1f801386e0ceb909d001" },
->>>>>>> 2da8091 (chore: update lazy-lock.json and colorscheme config)
   "fidget.nvim": { "branch": "main", "commit": "d9ba6b7bfe29b3119a610892af67602641da778e" },
   "friendly-snippets": { "branch": "main", "commit": "efff286dd74c22f731cdec26a70b46e5b203c619" },
-  "fzf-lua": { "branch": "main", "commit": "47b85a25c0c0b2c20b4e75199ed01bb71e7814f5" },
-  "github-theme": { "branch": "main", "commit": "c106c9472154d6b2c74b74565616b877ae8ed31d" },
+  "fzf-lua": { "branch": "main", "commit": "dc693475c4463463d84a0c7c43d463b8a8cd3aea" },
   "gitlinker.nvim": { "branch": "master", "commit": "cc59f732f3d043b626c8702cb725c82e54d35c25" },
-  "gruvbox-material": { "branch": "master", "commit": "146f40fd42cbef30fed69b4ef51329aeeaceb909" },
   "harpoon": { "branch": "harpoon2", "commit": "ed1f853847ffd04b2b61c314865665e1dadf22c7" },
   "lazy.nvim": { "branch": "main", "commit": "6c3bda4aca61a13a9c63f1c1d1b16b9d3be90d7a" },
   "lazydev.nvim": { "branch": "main", "commit": "2367a6c0a01eb9edb0464731cc0fb61ed9ab9d2c" },
   "lazygit.nvim": { "branch": "main", "commit": "b9eae3badab982e71abab96d3ee1d258f0c07961" },
-  "miasma.nvim": { "branch": "main", "commit": "b50e9ab4f29cbc5d064f75b64acb8383551ad794" },
-<<<<<<< HEAD
-  "mini.nvim": { "branch": "main", "commit": "2e38ed16c2ced64bcd576986ccad4b18e2006e18" },
-  "nvim-lspconfig": { "branch": "master", "commit": "3e873195f501b1e02d9fd7e5af5cbe74fc2f98c1" },
-  "nvim-tree.lua": { "branch": "master", "commit": "c3c193594213c5e2f89ec5d7729cad805f76b256" },
-  "nvim-treesitter": { "branch": "master", "commit": "523a9e148919f58eb5a013f76787e57696e00c93" },
-  "nvim-web-devicons": { "branch": "master", "commit": "4c3a5848ee0b09ecdea73adcd2a689190aeb728c" },
-||||||| parent of 2da8091 (chore: update lazy-lock.json and colorscheme config)
-  "mini.nvim": { "branch": "main", "commit": "687fa868d869078194c02065628712982d971fd6" },
-  "nvim-lspconfig": { "branch": "master", "commit": "ff6471d4f837354d8257dfa326b031dd8858b16e" },
-  "nvim-tree.lua": { "branch": "master", "commit": "44d9b58f11d5a426c297aafd0be1c9d45617a849" },
-  "nvim-treesitter": { "branch": "master", "commit": "4b390e1e46ca2e6220f14641cb840bbf9ad5446f" },
-  "nvim-web-devicons": { "branch": "master", "commit": "4c3a5848ee0b09ecdea73adcd2a689190aeb728c" },
-=======
-  "mini.nvim": { "branch": "main", "commit": "a90045c8b2bc2bc8a8eeb8ab23cf8242dd9b16e7" },
-  "neovim-ayu": { "branch": "master", "commit": "f5da37a8ddd62fc3a7b28900c4d1b807a3582584" },
-  "nvim-lspconfig": { "branch": "master", "commit": "9ae789e7450995e4c06ed9f8f74629992d5d28a6" },
-  "nvim-tree.lua": { "branch": "master", "commit": "c3c193594213c5e2f89ec5d7729cad805f76b256" },
+  "mini.nvim": { "branch": "main", "commit": "b418d585d99bd1c1a4b04dc8b2c585471665173a" },
+  "nvim-lspconfig": { "branch": "master", "commit": "b6936cb85d1e95b5ff00016b1185ab1a14450579" },
+  "nvim-tree.lua": { "branch": "master", "commit": "5bea2b37523a31288e0fcab42f3be5c1bd4516bb" },
   "nvim-treesitter": { "branch": "master", "commit": "0e21ee8df6235511c02bab4a5b391d18e165a58d" },
-  "nvim-web-devicons": { "branch": "master", "commit": "57dfa947cc88cdf1baa2c7e13ed31edddd8fb1d1" },
->>>>>>> 2da8091 (chore: update lazy-lock.json and colorscheme config)
+  "nvim-web-devicons": { "branch": "master", "commit": "c90dee4e930ab9f49fa6d77f289bff335b49e972" },
   "plenary.nvim": { "branch": "master", "commit": "857c5ac632080dba10aae49dba902ce3abf91b35" },
-<<<<<<< HEAD
-  "render-markdown.nvim": { "branch": "main", "commit": "0ed141a60ca4befcaf923b21c36f6f2971d61b9e" },
-||||||| parent of 2da8091 (chore: update lazy-lock.json and colorscheme config)
-  "render-markdown.nvim": { "branch": "main", "commit": "c283dec1ea94947499c36bb17443e15d6acf5cda" },
-=======
-  "render-markdown.nvim": { "branch": "main", "commit": "05e6a6d119f90b99829ecb7eb85428a226c0c05f" },
->>>>>>> 2da8091 (chore: update lazy-lock.json and colorscheme config)
-  "tokyonight.nvim": { "branch": "main", "commit": "057ef5d260c1931f1dffd0f052c685dcd14100a3" },
-  "vesper.nvim": { "branch": "main", "commit": "4e96a753a964192b5904598e64366a93eef5449d" },
+  "render-markdown.nvim": { "branch": "main", "commit": "8bb0d4725cc4909a603158d44ff28b6158ad9278" },
   "which-key.nvim": { "branch": "main", "commit": "370ec46f710e058c9c1646273e6b225acf47cbed" }
 }
