@@ -31,4 +31,18 @@ return {
       vim.cmd 'colorscheme github_dark_tritanopia'
     end,
   },
+  {
+    'zenbones-theme/zenbones.nvim',
+    dependencies = 'rktjmp/lush.nvim',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.o.background = 'light'
+      vim.g.zenbones = {
+        solid_line_nr = true,
+        solid_vert_split = true,
+      }
+      vim.cmd.colorscheme 'zenbones'
+    end,
+  },
 }

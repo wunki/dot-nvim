@@ -36,8 +36,8 @@ vim.opt.shortmess:append 'I'
 vim.opt.termguicolors = true
 
 -- do we want line numbers? Neh...
-vim.opt.number = false
-vim.opt.relativenumber = false
+vim.opt.number = true
+vim.opt.relativenumber = true
 
 -- save undo history
 vim.opt.undofile = true
