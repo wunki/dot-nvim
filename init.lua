@@ -37,7 +37,6 @@ vim.opt.termguicolors = true
 
 -- do we want line numbers? Neh...
 vim.opt.number = true
-vim.opt.relativenumber = true
 
 -- save undo history
 vim.opt.undofile = true

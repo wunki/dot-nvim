@@ -1,7 +1,7 @@
 return {
   {
     'sainnhe/gruvbox-material',
-    enabled = false,
+    enabled = true,
     lazy = false,
     priority = 1000,
     config = function()
@@ -11,28 +11,10 @@ return {
       vim.g.gruvbox_material_float_style = 'dim'
       vim.g.gruvbox_material_visual = 'green background'
     end,
-    init = function()
-      vim.cmd.colorscheme 'gruvbox-material'
-    end,
-  },
-  {
-    'projekt0n/github-nvim-theme',
-    enabled = false,
-    name = 'github-theme',
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require('github-theme').setup {
-        options = {
-          dim_inactive = false,
-        },
-      }
-
-      vim.cmd 'colorscheme github_dark_tritanopia'
-    end,
   },
   {
     'zenbones-theme/zenbones.nvim',
+    enabled = true,
     dependencies = 'rktjmp/lush.nvim',
     lazy = false,
     priority = 1000,
@@ -41,8 +23,22 @@ return {
       vim.g.zenbones = {
         solid_line_nr = true,
         solid_vert_split = true,
+        lightness = 'bright',
       }
-      vim.cmd.colorscheme 'zenbones'
     end,
+  },
+  {
+    'f-person/auto-dark-mode.nvim',
+    opts = {
+      update_interval = 1000,
+      set_dark_mode = function()
+        vim.cmd 'colorscheme gruvbox-material'
+        vim.cmd 'set bg=dark'
+      end,
+      set_light_mode = function()
+        vim.cmd 'colorscheme zenbones'
+        vim.cmd 'set bg=light'
+      end,
+    },
   },
 }

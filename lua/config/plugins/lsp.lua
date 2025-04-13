@@ -81,7 +81,7 @@ return {
           end
 
           -- custom mappings
-          map('gd', require('fzf-lua').lsp_definitions, '[G]oto [D]efinition')
+          map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
 
           -- these are now the default mappings in HEAD
           map('grn', vim.lsp.buf.rename, 'Rename')

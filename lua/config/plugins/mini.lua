@@ -15,7 +15,7 @@ return {
       -- statusline
       local statusline = require 'mini.statusline'
       statusline.setup {
-        use_icons = true,
+        use_icons = false,
       }
 
       -- files
