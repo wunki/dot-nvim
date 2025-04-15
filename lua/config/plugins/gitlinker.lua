@@ -12,6 +12,6 @@ return {
   end,
   keys = {
     { '<leader>gy', desc = 'Open current line in GitHub' },
-    { '<leader>gy', mode = 'v',                          desc = 'Open selected lines in GitHub' },
+    { '<leader>gy', mode = 'v', desc = 'Open selected lines in GitHub' },
   },
 }
