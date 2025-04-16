@@ -21,6 +21,7 @@ return {
     priority = 1000,
     config = function()
       vim.o.background = 'light'
+      vim.opt.termguicolors = true
       vim.g.zenbones = {
         solid_line_nr = true,
         solid_vert_split = true,
@@ -33,6 +34,8 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
+      vim.o.background = 'dark'
+      vim.opt.termguicolors = true
       require('vesper').setup {
         transparent = false, -- Boolean: Sets the background to transparent
         italics = {
@@ -45,10 +48,12 @@ return {
         overrides = {}, -- A dictionary of group names, can be a function returning a dictionary or a table.
         palette_overrides = {},
       }
+      vim.cmd 'colorscheme vesper'
     end,
   },
   {
     'f-person/auto-dark-mode.nvim',
+    enabled = vim.fn.has 'mac' == 1,
     opts = {
       update_interval = 1000,
       set_dark_mode = function()
