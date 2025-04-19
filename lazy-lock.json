@@ -1,5 +1,4 @@
 {
-  "auto-dark-mode.nvim": { "branch": "master", "commit": "c31de126963ffe9403901b4b0990dde0e6999cc6" },
   "blink.cmp": { "branch": "main", "commit": "cb5e346d9e0efa7a3eee7fd4da0b690c48d2a98e" },
   "conform.nvim": { "branch": "master", "commit": "6632e7d788a85bf8405ea0c812d343fc308b7b8c" },
   "fidget.nvim": { "branch": "main", "commit": "d9ba6b7bfe29b3119a610892af67602641da778e" },
@@ -13,15 +12,7 @@
   "lazygit.nvim": { "branch": "main", "commit": "b9eae3badab982e71abab96d3ee1d258f0c07961" },
   "lush.nvim": { "branch": "main", "commit": "45a79ec4acb5af783a6a29673a999ce37f00497e" },
   "mini.nvim": { "branch": "main", "commit": "ed581c333798e08a68fbe1aecfdf95d3c1432d3f" },
-<<<<<<< HEAD
-  "nvim-lspconfig": { "branch": "master", "commit": "b70b900fba6e3255a5a8113c76f213102564cb0d" },
-||||||| parent of 8480f92 (lackluster theme)
-  "mini.nvim": { "branch": "main", "commit": "b418d585d99bd1c1a4b04dc8b2c585471665173a" },
-  "modus-themes.nvim": { "branch": "master", "commit": "b6c46f8066b2d96cb75d5bc7202a9a4c097b5e9f" },
-  "nvim-lspconfig": { "branch": "master", "commit": "f9b6a702b7430aff0770c04771f2dba78163d2c6" },
-=======
   "nvim-lspconfig": { "branch": "master", "commit": "32b6a6449aaba11461fffbb596dd6310af79eea4" },
->>>>>>> 8480f92 (lackluster theme)
   "nvim-tree.lua": { "branch": "master", "commit": "5bea2b37523a31288e0fcab42f3be5c1bd4516bb" },
   "nvim-treesitter": { "branch": "master", "commit": "684eeac91ed8e297685a97ef70031d19ac1de25a" },
   "nvim-web-devicons": { "branch": "master", "commit": "c90dee4e930ab9f49fa6d77f289bff335b49e972" },
