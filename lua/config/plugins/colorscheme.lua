@@ -30,35 +30,11 @@ return {
     end,
   },
   {
-    'datsfilipe/vesper.nvim',
-    lazy = false,
-    priority = 1000,
-    config = function()
-      vim.o.background = 'dark'
-      vim.opt.termguicolors = true
-      require('vesper').setup {
-        transparent = false, -- Boolean: Sets the background to transparent
-        italics = {
-          comments = true, -- Boolean: Italicizes comments
-          keywords = false, -- Boolean: Italicizes keywords
-          functions = false, -- Boolean: Italicizes functions
-          strings = true, -- Boolean: Italicizes strings
-          variables = false, -- Boolean: Italicizes variables
-        },
-        overrides = {}, -- A dictionary of group names, can be a function returning a dictionary or a table.
-        palette_overrides = {},
-      }
-      vim.cmd 'colorscheme vesper'
-    end,
-  },
-  {
     'slugbyte/lackluster.nvim',
     lazy = false,
     priority = 1000,
     init = function()
-      -- vim.cmd.colorscheme 'lackluster'
-      -- vim.cmd.colorscheme("lackluster-hack") -- my favorite
-      -- vim.cmd.colorscheme("lackluster-mint")
+      vim.cmd.colorscheme 'lackluster-dark'
     end,
   },
   {
