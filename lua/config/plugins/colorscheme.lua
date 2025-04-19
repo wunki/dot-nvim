@@ -52,12 +52,22 @@ return {
     end,
   },
   {
+    'slugbyte/lackluster.nvim',
+    lazy = false,
+    priority = 1000,
+    init = function()
+      -- vim.cmd.colorscheme 'lackluster'
+      -- vim.cmd.colorscheme("lackluster-hack") -- my favorite
+      -- vim.cmd.colorscheme("lackluster-mint")
+    end,
+  },
+  {
     'f-person/auto-dark-mode.nvim',
     enabled = vim.fn.has 'mac' == 1,
     opts = {
       update_interval = 1000,
       set_dark_mode = function()
-        vim.cmd 'colorscheme vesper'
+        vim.cmd 'colorscheme lackluster-dark'
         vim.cmd 'set bg=dark'
       end,
       set_light_mode = function()
