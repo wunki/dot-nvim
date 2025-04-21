@@ -34,6 +34,13 @@ return {
     lazy = false,
     priority = 1000,
     init = function()
+      local lackluster = require 'lackluster'
+      local color = lackluster.color
+      lackluster.setup {
+        tweak_background = {
+          normal = color.gray1,
+        },
+      }
       vim.cmd.colorscheme 'lackluster-hack'
     end,
   },

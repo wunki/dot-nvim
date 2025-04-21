@@ -79,6 +79,7 @@ nvim
 |-----|-------------|
 | `<leader>A` | Add file to harpoon |
 | `<leader>a` | Toggle harpoon quick menu |
+| `<leader>ft` | Find harpoon marks with Telescope |
 | `<leader>1-5` | Jump to harpoon file 1-5 |
 
 ### Git Integration
