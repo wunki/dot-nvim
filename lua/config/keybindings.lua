@@ -24,12 +24,23 @@ function M.setup()
     vim.opt.number = not vim.o.number
   end, { desc = 'Toggle line numbers' })
 
+  -- switch colorschemes
+  vim.keymap.set('n', '<space>us', function()
+    if vim.g.colors_name == 'zenbones' then
+      vim.cmd 'highlight clear'
+      vim.cmd 'colorscheme lackluster-hack'
+      vim.cmd 'set bg=dark'
+    else
+      vim.cmd 'highlight clear'
+      vim.cmd 'colorscheme zenbones'
+      vim.cmd 'set bg=light'
+    end
+  end, { desc = 'Toggle colorscheme (dark|light)' })
+
   -- Register which-key groups
   local wk = require 'which-key'
   wk.add {
-    { '<leader>x', desc = 'Execute Lua' },
     { '<leader>u', group = 'UI' },
-    { '<leader>ul', desc = 'Toggle line numbers' },
   }
 end
 

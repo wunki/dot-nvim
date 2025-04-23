@@ -50,10 +50,12 @@ return {
     opts = {
       update_interval = 1000,
       set_dark_mode = function()
+        vim.cmd 'highlight clear'
         vim.cmd 'colorscheme lackluster-hack'
         vim.cmd 'set bg=dark'
       end,
       set_light_mode = function()
+        vim.cmd 'highlight clear'
         vim.cmd 'colorscheme zenbones'
         vim.cmd 'set bg=light'
       end,
