@@ -12,6 +12,9 @@ return {
       vim.g.gruvbox_material_visual = 'green background'
       vim.g.gruvbox_material_sign_column_background = 'grey'
     end,
+    init = function()
+      vim.cmd.colorscheme 'gruvbox-material'
+    end,
   },
   {
     'zenbones-theme/zenbones.nvim',
@@ -20,7 +23,6 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
-      vim.o.background = 'light'
       vim.opt.termguicolors = true
       vim.g.zenbones = {
         solid_line_nr = true,
@@ -31,6 +33,7 @@ return {
   },
   {
     'slugbyte/lackluster.nvim',
+    enabled = false,
     lazy = false,
     priority = 1000,
     init = function()
@@ -51,7 +54,7 @@ return {
       update_interval = 1000,
       set_dark_mode = function()
         vim.cmd 'highlight clear'
-        vim.cmd 'colorscheme lackluster-hack'
+        vim.cmd 'colorscheme gruvbox-material'
         vim.cmd 'set bg=dark'
       end,
       set_light_mode = function()
@@ -61,4 +64,5 @@ return {
       end,
     },
   },
+  { 'datsfilipe/vesper.nvim' },
 }

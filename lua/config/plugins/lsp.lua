@@ -41,24 +41,6 @@ return {
       -- volar, required for Vue
       require('lspconfig').volar.setup { capabilities = capabilities }
 
-      -- Deno
-      --[[
-      require('lspconfig').denols.setup {
-        cmd = { 'deno', 'lsp' },
-        root_dir = require('lspconfig').util.root_pattern('deno.json', 'deno.jsonc'),
-        single_file_support = false,
-        settings = {
-          deno = {
-            enable = true,
-            lint = true,
-            unstable = true,
-            suggest_imports = true,
-          },
-        },
-        capabilities = capabilities,
-      }
-      ]]
-
       -- C
       require('lspconfig').clangd.setup { capabilities = capabilities }
 
