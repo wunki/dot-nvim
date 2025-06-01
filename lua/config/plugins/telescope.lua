@@ -12,6 +12,7 @@ return {
     telescope.setup {
       defaults = {
         prompt_prefix = ' ',
+        selection_caret = '• ',
         color_devicons = false,
       },
       pickers = {

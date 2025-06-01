@@ -10,7 +10,7 @@ return {
       vim.g.gruvbox_material_background = 'hard'
       vim.g.gruvbox_material_float_style = 'dim'
       vim.g.gruvbox_material_visual = 'green background'
-      vim.g.gruvbox_material_sign_column_background = 'grey'
+      vim.g.gruvbox_material_sign_column_background = 'none'
     end,
     init = function()
       vim.cmd.colorscheme 'gruvbox-material'
