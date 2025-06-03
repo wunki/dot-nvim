@@ -35,8 +35,8 @@ vim.opt.shortmess:append 'I'
 -- 24 bit colors
 vim.opt.termguicolors = true
 
--- do we want line numbers? Neh...
-vim.opt.number = true
+-- do we want line numbers? Neh...not by default
+vim.opt.number = false
 
 -- save undo history
 vim.opt.undofile = true
