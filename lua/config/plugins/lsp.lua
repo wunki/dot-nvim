@@ -23,6 +23,9 @@ return {
       -- lua
       require('lspconfig').lua_ls.setup { capabilities = capabilities }
 
+      -- typescript with biome
+      require('lspconfig').biome.setup { capabilities = capabilities }
+
       -- typescript
       require('lspconfig').ts_ls.setup {
         init_options = {
@@ -37,9 +40,6 @@ return {
         filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
         capabilities = capabilities,
       }
-
-      -- volar, required for Vue
-      require('lspconfig').volar.setup { capabilities = capabilities }
 
       -- C
       require('lspconfig').clangd.setup { capabilities = capabilities }
