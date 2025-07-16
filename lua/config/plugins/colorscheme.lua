@@ -1,7 +1,7 @@
 return {
   {
     'sainnhe/gruvbox-material',
-    enabled = true,
+    enabled = false,
     lazy = false,
     priority = 1000,
     config = function()
@@ -33,7 +33,7 @@ return {
   },
   {
     'slugbyte/lackluster.nvim',
-    enabled = false,
+    enabled = true,
     lazy = false,
     priority = 1000,
     init = function()
@@ -44,7 +44,6 @@ return {
           normal = color.gray1,
         },
       }
-      vim.cmd.colorscheme 'lackluster-hack'
     end,
   },
   {
@@ -54,7 +53,7 @@ return {
       update_interval = 1000,
       set_dark_mode = function()
         vim.cmd 'highlight clear'
-        vim.cmd 'colorscheme gruvbox-material'
+        vim.cmd 'colorscheme lackluster-hack'
         vim.cmd 'set bg=dark'
       end,
       set_light_mode = function()
@@ -63,6 +62,5 @@ return {
         vim.cmd 'set bg=light'
       end,
     },
-  },
-  { 'datsfilipe/vesper.nvim' },
+  }
 }

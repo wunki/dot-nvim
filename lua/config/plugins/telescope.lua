@@ -39,6 +39,9 @@ return {
       }
     end)
 
+    -- colorschemes
+    vim.keymap.set('n', '<space>fh', builtin.colorscheme)
+
     -- help tags
     vim.keymap.set('n', '<space>fh', builtin.help_tags)
 
