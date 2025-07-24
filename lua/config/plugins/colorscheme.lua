@@ -17,6 +17,19 @@ return {
     end,
   },
   {
+    'projekt0n/github-nvim-theme',
+    name = 'github-theme',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require('github-theme').setup {
+        -- optional configuration
+      }
+
+      vim.cmd 'colorscheme github_dark_default'
+    end,
+  },
+  {
     'zenbones-theme/zenbones.nvim',
     enabled = true,
     dependencies = 'rktjmp/lush.nvim',
@@ -33,7 +46,7 @@ return {
   },
   {
     'slugbyte/lackluster.nvim',
-    enabled = true,
+    enabled = false,
     lazy = false,
     priority = 1000,
     init = function()
@@ -53,7 +66,7 @@ return {
       update_interval = 1000,
       set_dark_mode = function()
         vim.cmd 'highlight clear'
-        vim.cmd 'colorscheme lackluster-hack'
+        vim.cmd 'colorscheme github_dark_default'
         vim.cmd 'set bg=dark'
       end,
       set_light_mode = function()
@@ -62,5 +75,5 @@ return {
         vim.cmd 'set bg=light'
       end,
     },
-  }
+  },
 }
