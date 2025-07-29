@@ -1,7 +1,7 @@
 return {
   {
     'sainnhe/gruvbox-material',
-    enabled = false,
+    enabled = true,
     lazy = false,
     priority = 1000,
     config = function()
@@ -18,6 +18,7 @@ return {
   },
   {
     'projekt0n/github-nvim-theme',
+    enabled = false,
     name = 'github-theme',
     lazy = false,
     priority = 1000,
@@ -66,7 +67,7 @@ return {
       update_interval = 1000,
       set_dark_mode = function()
         vim.cmd 'highlight clear'
-        vim.cmd 'colorscheme github_dark_default'
+        vim.cmd 'colorscheme gruvbox-material'
         vim.cmd 'set bg=dark'
       end,
       set_light_mode = function()
