@@ -1,57 +1,58 @@
 return {
   {
-    'neovim/nvim-lspconfig',
-
-    -- sane configuration for Lua
-    dependencies = {
-      { 'j-hui/fidget.nvim', opts = {} }, -- useful notifcations
-      'saghen/blink.cmp', -- autocompletion
-      {
-        'folke/lazydev.nvim',
-        ft = 'lua',
-        opts = {
-          library = {
-            { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
-          },
-        },
+    -- Dependencies for LSP functionality
+    { 'j-hui/fidget.nvim', opts = {} }, -- useful notifications
+  },
+  {
+    'saghen/blink.cmp', -- autocompletion
+  },
+  {
+    'folke/lazydev.nvim',
+    ft = 'lua',
+    opts = {
+      library = {
+        { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
       },
     },
+  },
+  {
+    name = 'native-lsp-config',
+    dir = vim.fn.stdpath 'config',
     config = function()
       -- blink autocompletion capabilities
       local capabilities = require('blink.cmp').get_lsp_capabilities()
 
-      -- lua
-      require('lspconfig').lua_ls.setup { capabilities = capabilities }
-
-      -- typescript with biome
-      require('lspconfig').biome.setup { capabilities = capabilities }
-
-      -- typescript
-      require('lspconfig').ts_ls.setup {
-        init_options = {
-          plugins = {
-            {
-              name = '@vue/typescript-plugin',
-              location = vim.fn.expand '~/.local/share/pnpm/vue-language-server',
-              languages = { 'vue' },
+      -- LSP server configurations
+      local servers = {
+        lua_ls = {},
+        biome = {},
+        ts_ls = {
+          init_options = {
+            plugins = {
+              {
+                name = '@vue/typescript-plugin',
+                location = vim.fn.expand '~/.local/share/pnpm/vue-language-server',
+                languages = { 'vue' },
+              },
             },
           },
+          filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
         },
-        filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
-        capabilities = capabilities,
+        clangd = {},
+        svelte = {},
+        expert = {
+          cmd = { 'expert' },
+          root_markers = { 'mix.exs', '.git' },
+          filetypes = { 'elixir', 'eelixir', 'heex' },
+        },
       }
 
-      -- C
-      require('lspconfig').clangd.setup { capabilities = capabilities }
-
-      -- svelte
-      require('lspconfig').svelte.setup { capabilities = capabilities }
-
-      -- elixir
-      require('lspconfig').elixirls.setup {
-        capabilities = capabilities,
-        cmd = { vim.fn.expand '~/.local/share/elixir-ls/language_server.sh' },
-      }
+      -- Configure and enable each server
+      for server, config in pairs(servers) do
+        config.capabilities = capabilities
+        vim.lsp.config(server, config)
+        vim.lsp.enable(server)
+      end
 
       -- setup formatting on save for every lsp that supports it.
       vim.api.nvim_create_autocmd('LspAttach', {
