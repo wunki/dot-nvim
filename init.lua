@@ -7,6 +7,9 @@ vim.opt.tabstop = 2 -- number of spaces a tab counts for
 vim.opt.softtabstop = 2 -- number of spaces a tab counts for while editing
 vim.opt.smartindent = true -- smart autoindenting for newlines
 
+-- move between words
+vim.opt.iskeyword:remove '_'
+
 -- enable break indent, making longer lines easier to read
 vim.opt.breakindent = true
 
