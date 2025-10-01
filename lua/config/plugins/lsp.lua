@@ -27,19 +27,15 @@ return {
         lua_ls = {},
         biome = {},
         ts_ls = {
-          init_options = {
-            plugins = {
-              {
-                name = '@vue/typescript-plugin',
-                location = vim.fn.expand '~/.local/share/pnpm/vue-language-server',
-                languages = { 'vue' },
-              },
-            },
-          },
+          cmd = { 'typescript-language-server', '--stdio' },
           filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+          root_markers = { 'package.json', 'tsconfig.json', 'jsconfig.json', '.git' },
         },
         clangd = {},
-        svelte = {},
+        svelte = {
+          cmd = { 'svelteserver', '--stdio' },
+          filetypes = { 'svelte' },
+        },
         expert = {
           cmd = { 'expert' },
           root_markers = { 'mix.exs', '.git' },

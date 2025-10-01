@@ -27,6 +27,16 @@ git clone https://github.com/yourusername/dot-nvim ~/.config/nvim
 nvim
 ```
 
+## 🌐 Language Servers
+
+This setup expects language servers to be available globally. For Svelte support make sure the Svelte language server is installed (the path defaults to pnpm's global store):
+
+```bash
+pnpm add --global svelte-language-server
+```
+
+Adjust the path in `lua/config/plugins/lsp.lua` if you prefer another package manager.
+
 ## ⌨️ Key Bindings
 
 ### General
