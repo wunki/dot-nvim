@@ -4,6 +4,7 @@ return {
   dependencies = {
     'nvim-lua/plenary.nvim',
     'nvim-tree/nvim-web-devicons',
+    'nvim-telescope/telescope-frecency.nvim',
   },
   config = function()
     local telescope = require 'telescope'
@@ -20,10 +21,19 @@ return {
           enable_preview = true,
         },
       },
+      extensions = {
+        frecency = {
+          show_filter_column = false,
+        },
+      },
     }
 
-    -- find files in current directory
-    vim.keymap.set('n', '<space>ff', builtin.find_files)
+    telescope.load_extension 'frecency'
+
+    -- find files in current directory (sorted by recent use)
+    vim.keymap.set('n', '<space>ff', function()
+      telescope.extensions.frecency.frecency { workspace = 'CWD' }
+    end)
 
     -- find my neovim config files
     vim.keymap.set('n', '<space>fc', function()
