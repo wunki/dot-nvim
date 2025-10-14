@@ -60,7 +60,9 @@ return {
           end
 
           -- custom mappings
-          map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+          map('gd', function()
+            Snacks.picker.lsp_definitions()
+          end, '[G]oto [D]efinition')
 
           -- these are now the default mappings in HEAD
           map('grn', vim.lsp.buf.rename, 'Rename')

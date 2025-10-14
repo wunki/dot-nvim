@@ -3,36 +3,12 @@ return {
   branch = 'harpoon2',
   dependencies = {
     'nvim-lua/plenary.nvim',
-    'nvim-telescope/telescope.nvim',
   },
   config = function()
     local harpoon = require 'harpoon'
 
     -- Basic harpoon setup
     harpoon:setup {}
-
-    -- Setup Telescope integration
-    local conf = require('telescope.config').values
-    local function toggle_telescope(harpoon_files)
-      local file_paths = {}
-      for _, item in ipairs(harpoon_files.items) do
-        table.insert(file_paths, item.value)
-      end
-
-      require('telescope.pickers')
-        .new({}, {
-          prompt_title = 'Harpoon',
-          finder = require('telescope.finders').new_table {
-            results = file_paths,
-          },
-          previewer = conf.file_previewer {},
-          sorter = conf.generic_sorter {},
-        })
-        :find()
-    end
-
-    -- Register the Telescope extension
-    require('telescope').load_extension 'harpoon'
   end,
   keys = {
     {
@@ -53,9 +29,32 @@ return {
     {
       '<leader>ft',
       function()
-        require('telescope').extensions.harpoon.marks()
+        local harpoon = require 'harpoon'
+        local list = harpoon:list()
+        local items = {}
+        for _, it in ipairs(list.items or {}) do
+          table.insert(items, { text = it.value, file = it.value })
+        end
+        Snacks.picker.pick {
+          source = 'harpoon',
+          items = items,
+          format = 'file',
+          preview = 'preview',
+          confirm = function(picker, item)
+            picker:close()
+            if not item then
+              return
+            end
+            for i, it in ipairs(list.items or {}) do
+              if it.value == item.text then
+                list:select(i)
+                break
+              end
+            end
+          end,
+        }
       end,
-      desc = 'Find harpoon marks with Telescope',
+      desc = 'Find harpoon marks',
     },
     {
       '<leader>1',
