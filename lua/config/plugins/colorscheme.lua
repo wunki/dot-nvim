@@ -18,7 +18,7 @@ return {
   },
   {
     'projekt0n/github-nvim-theme',
-    enabled = true,
+    enabled = false,
     name = 'github-theme',
     lazy = false,
     priority = 1000,
@@ -28,6 +28,31 @@ return {
       }
 
       vim.cmd 'colorscheme github_dark_tritanopia'
+    end,
+  },
+  {
+    "folke/tokyonight.nvim",
+    enabled = true,
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("tokyonight").setup({
+        style = "night", -- The "night" style is closest to Zed Dark
+        on_colors = function(colors)
+          -- Override the background to match Zed Dark's #080A0D
+          colors.bg = "#080A0D"
+          colors.bg_dark = "#080A0D"
+          colors.bg_float = "#101419" -- Matches panel.background from your json
+          
+          -- Optional: Match foreground text slightly better
+          colors.fg = "#D0D3DA"
+          colors.fg_dark = "#D0D3DA"
+          
+          -- Match the border color
+          colors.border = "#1C2129"
+        end,
+      })
+      vim.cmd[[colorscheme tokyonight]]
     end,
   },
   {
@@ -67,7 +92,7 @@ return {
       update_interval = 1000,
       set_dark_mode = function()
         vim.cmd 'highlight clear'
-        vim.cmd 'colorscheme github_dark_tritanopia'
+        vim.cmd 'colorscheme tokyonight'
         vim.cmd 'set bg=dark'
       end,
       set_light_mode = function()
