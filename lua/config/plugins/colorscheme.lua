@@ -11,8 +11,6 @@ return {
       vim.g.gruvbox_material_float_style = 'dim'
       vim.g.gruvbox_material_visual = 'green background'
       vim.g.gruvbox_material_sign_column_background = 'none'
-    end,
-    init = function()
       vim.cmd.colorscheme 'gruvbox-material'
     end,
   },
@@ -22,37 +20,23 @@ return {
     name = 'github-theme',
     lazy = false,
     priority = 1000,
-    config = function()
-      require('github-theme').setup {
-        -- optional configuration
-      }
-
-      vim.cmd 'colorscheme github_dark_tritanopia'
+    opts = {},
+    config = function(_, opts)
+      require('github-theme').setup(opts)
+      vim.cmd.colorscheme 'github_dark_tritanopia'
     end,
   },
   {
-    "folke/tokyonight.nvim",
-    enabled = true,
+    'Shatur/neovim-ayu',
+    enabled = false,
     lazy = false,
     priority = 1000,
-    config = function()
-      require("tokyonight").setup({
-        style = "night", -- The "night" style is closest to Zed Dark
-        on_colors = function(colors)
-          -- Override the background to match Zed Dark's #080A0D
-          colors.bg = "#080A0D"
-          colors.bg_dark = "#080A0D"
-          colors.bg_float = "#101419" -- Matches panel.background from your json
-          
-          -- Optional: Match foreground text slightly better
-          colors.fg = "#D0D3DA"
-          colors.fg_dark = "#D0D3DA"
-          
-          -- Match the border color
-          colors.border = "#1C2129"
-        end,
-      })
-      vim.cmd[[colorscheme tokyonight]]
+    opts = {
+      mirage = false,
+    },
+    config = function(_, opts)
+      require('ayu').setup(opts)
+      vim.cmd.colorscheme 'ayu-dark'
     end,
   },
   {
@@ -62,7 +46,6 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
-      vim.opt.termguicolors = true
       vim.g.zenbones = {
         solid_line_nr = true,
         solid_vert_split = true,
@@ -75,14 +58,28 @@ return {
     enabled = false,
     lazy = false,
     priority = 1000,
-    init = function()
+    opts = {
+      tweak_background = {
+        normal = 'none',
+      },
+    },
+    config = function(_, opts)
       local lackluster = require 'lackluster'
-      local color = lackluster.color
-      lackluster.setup {
-        tweak_background = {
-          normal = color.gray1,
-        },
-      }
+      opts.tweak_background.normal = lackluster.color.gray1
+      lackluster.setup(opts)
+      vim.cmd.colorscheme 'lackluster'
+    end,
+  },
+
+  {
+    dir = '/Users/petar/Code/finde.nvim',
+    name = 'finde',
+    enabled = true,
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require('finde').setup {}
+      vim.cmd.colorscheme 'finde'
     end,
   },
   {
@@ -92,13 +89,13 @@ return {
       update_interval = 1000,
       set_dark_mode = function()
         vim.cmd 'highlight clear'
-        vim.cmd 'colorscheme tokyonight'
-        vim.cmd 'set bg=dark'
+        vim.cmd.colorscheme 'finde'
+        vim.opt.background = 'dark'
       end,
       set_light_mode = function()
         vim.cmd 'highlight clear'
-        vim.cmd 'colorscheme zenbones'
-        vim.cmd 'set bg=light'
+        vim.cmd.colorscheme 'zenbones'
+        vim.opt.background = 'light'
       end,
     },
   },

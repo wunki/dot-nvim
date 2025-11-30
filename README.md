@@ -27,15 +27,33 @@ git clone https://github.com/yourusername/dot-nvim ~/.config/nvim
 nvim
 ```
 
-## 🌐 Language Servers
+## 🌐 External Dependencies
 
-This setup expects language servers to be available globally. For Svelte support make sure the Svelte language server is installed (the path defaults to pnpm's global store):
+This setup expects language servers and formatters to be installed globally.
 
+### Language Servers
+
+| Server | Languages | Install |
+|--------|-----------|---------|
+| lua-language-server | Lua | `brew install lua-language-server` |
+| typescript-language-server | JS/TS | `npm install -g typescript-language-server typescript` |
+| svelte-language-server | Svelte | `npm install -g svelte-language-server` |
+| biome | JS/TS/JSON | `npm install -g @biomejs/biome` |
+| clangd | C/C++ | `brew install llvm` or `xcode-select --install` |
+
+### Formatters
+
+| Formatter | Languages | Install |
+|-----------|-----------|---------|
+| stylua | Lua | `brew install stylua` |
+| prettierd | JS/TS/HTML/JSON/YAML/Markdown/Svelte | `npm install -g @fsouza/prettierd` |
+| shfmt | ZSH | `brew install shfmt` |
+| fish_indent | Fish | Included with Fish shell |
+
+For Svelte formatting with prettier, also install the plugin:
 ```bash
-pnpm add --global svelte-language-server
+npm install -g prettier-plugin-svelte
 ```
-
-Adjust the path in `lua/config/plugins/lsp.lua` if you prefer another package manager.
 
 ## ⌨️ Key Bindings
 

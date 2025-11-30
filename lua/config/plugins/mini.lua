@@ -18,7 +18,6 @@ return {
         use_icons = false,
         content = {
           active = function()
-
             local git = MiniStatusline.section_git { trunc_width = 40 }
             local diff = MiniStatusline.section_diff { trunc_width = 75 }
             local diagnostics = MiniStatusline.section_diagnostics { trunc_width = 75 }
@@ -31,9 +30,12 @@ return {
               end
               return (clients and #clients > 0) and '⚙' or ''
             end)()
-            local devinfo = table.concat(vim.tbl_filter(function(s)
-              return s ~= nil and s ~= ''
-            end, { git, diff, diagnostics, lsp_icon }), ' ')
+            local devinfo = table.concat(
+              vim.tbl_filter(function(s)
+                return s ~= nil and s ~= ''
+              end, { git, diff, diagnostics, lsp_icon }),
+              ' '
+            )
             local filename = MiniStatusline.section_filename { trunc_width = 140 }
 
             local location = tostring(vim.fn.line '.')

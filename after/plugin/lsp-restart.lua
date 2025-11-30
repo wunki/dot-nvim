@@ -1,10 +1,10 @@
 local function lsp_restart(bufnr)
   local api, lsp = vim.api, vim.lsp
   bufnr = bufnr or api.nvim_get_current_buf()
-  local clients = lsp.get_clients({ bufnr = bufnr })
+  local clients = lsp.get_clients { bufnr = bufnr }
 
   if #clients == 0 then
-    vim.cmd('edit')
+    vim.cmd 'edit'
     return
   end
 
@@ -30,4 +30,6 @@ local function lsp_restart(bufnr)
   end
 end
 
-vim.keymap.set('n', '<leader>lr', function() lsp_restart(0) end, { desc = 'LSP: Restart clients' })
+vim.keymap.set('n', '<leader>lr', function()
+  lsp_restart(0)
+end, { desc = 'LSP: Restart clients' })

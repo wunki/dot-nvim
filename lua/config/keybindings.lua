@@ -37,10 +37,23 @@ function M.setup()
     end
   end, { desc = 'Toggle colorscheme (dark|light)' })
 
+  -- show attached LSP clients
+  vim.keymap.set('n', '<leader>li', function()
+    local clients = vim.lsp.get_clients { bufnr = 0 }
+    if #clients == 0 then
+      vim.notify('No LSP attached', vim.log.levels.WARN)
+    else
+      for _, c in ipairs(clients) do
+        vim.notify(c.name .. ' (id: ' .. c.id .. ')', vim.log.levels.INFO)
+      end
+    end
+  end, { desc = 'Show attached LSP clients' })
+
   -- Register which-key groups
   local wk = require 'which-key'
   wk.add {
     { '<leader>u', group = 'UI' },
+    { '<leader>l', group = 'LSP/Lazy' },
   }
 end
 

@@ -11,6 +11,7 @@ return {
       yaml = { 'prettierd' },
       markdown = { 'prettierd' },
       html = { 'prettierd' },
+      svelte = { 'prettierd' },
       fish = { 'fish_indent' },
     },
     format_on_save = {
