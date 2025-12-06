@@ -43,5 +43,10 @@ return {
     vim.keymap.set('n', '<space>fg', function()
       P.grep()
     end, { desc = 'Live grep' })
+
+    -- colorscheme picker
+    vim.keymap.set('n', '<space>fcs', function()
+      P.colorschemes()
+    end, { desc = 'Pick colorscheme' })
   end,
 }
