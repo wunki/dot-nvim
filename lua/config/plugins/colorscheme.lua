@@ -1,3 +1,21 @@
+-- Reload the finde colorscheme (useful during development)
+local function reload_finde()
+  -- Clear cached modules
+  for name, _ in pairs(package.loaded) do
+    if name:match '^finde' then
+      package.loaded[name] = nil
+    end
+  end
+  -- Clear highlights and reload
+  vim.cmd 'highlight clear'
+  require('finde').setup {}
+  vim.cmd.colorscheme 'finde'
+  vim.notify('Reloaded finde colorscheme', vim.log.levels.INFO)
+end
+
+-- Expose globally for easy access
+vim.g.reload_finde = reload_finde
+
 return {
   {
     dir = '/Users/petar/Code/finde.nvim',
@@ -7,6 +25,9 @@ return {
     config = function()
       require('finde').setup {}
       vim.cmd.colorscheme 'finde'
+
+      -- Keybinding to reload finde colorscheme
+      vim.keymap.set('n', '<leader>ur', reload_finde, { desc = 'Reload finde colorscheme' })
     end,
   },
   {
