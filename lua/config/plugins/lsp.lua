@@ -24,21 +24,33 @@ return {
 
       -- LSP server configurations
       local servers = {
-        lua_ls = {},
-        biome = {},
+        lua_ls = {
+          cmd = { 'lua-language-server' },
+          filetypes = { 'lua' },
+          root_markers = { '.luarc.json', '.luarc.jsonc', '.stylua.toml', 'stylua.toml', '.git' },
+        },
+        biome = {
+          cmd = { 'biome', 'lsp-proxy' },
+          filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'json', 'jsonc' },
+          root_markers = { 'biome.json', 'biome.jsonc' },
+        },
         ts_ls = {
           cmd = { 'typescript-language-server', '--stdio' },
           filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
           root_markers = { 'package.json', 'tsconfig.json', 'jsconfig.json', '.git' },
         },
-        clangd = {},
+        clangd = {
+          cmd = { 'clangd' },
+          filetypes = { 'c', 'cpp', 'objc', 'objcpp' },
+          root_markers = { 'compile_commands.json', '.clangd', '.git' },
+        },
         svelte = {
           cmd = { 'svelteserver', '--stdio' },
           filetypes = { 'svelte' },
           root_markers = { 'package.json', 'svelte.config.js', 'svelte.config.ts', '.git' },
         },
         expert = {
-          cmd = { 'expert' },
+          cmd = { vim.fn.expand '~/.local/bin/expert_darwin_arm64', '--stdio' },
           root_markers = { 'mix.exs', '.git' },
           filetypes = { 'elixir', 'eelixir', 'heex' },
         },
@@ -46,9 +58,12 @@ return {
 
       -- Configure and enable each server
       for server, config in pairs(servers) do
-        config.capabilities = capabilities
-        vim.lsp.config(server, config)
-        vim.lsp.enable(server)
+        local cmd = config.cmd and config.cmd[1]
+        if cmd and vim.fn.executable(cmd) == 1 then
+          config.capabilities = capabilities
+          vim.lsp.config(server, config)
+          vim.lsp.enable(server)
+        end
       end
 
       -- setup formatting on save for every lsp that supports it.
