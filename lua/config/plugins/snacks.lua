@@ -19,10 +19,15 @@ return {
     require('snacks').setup(opts)
     local P = Snacks.picker
 
-    -- find files in current directory (sorted by frecency)
+    -- find git files (includes files in hidden directories like .github)
     vim.keymap.set('n', '<space>ff', function()
+      P.git_files()
+    end, { desc = 'Find git files' })
+
+    -- find all files (ignores hidden directories)
+    vim.keymap.set('n', '<space>fF', function()
       P.files { matcher = { frecency = true, sort_empty = true } }
-    end, { desc = 'Find files (frecency, CWD)' })
+    end, { desc = 'Find all files' })
 
     -- find my neovim config files
     vim.keymap.set('n', '<space>fc', function()
