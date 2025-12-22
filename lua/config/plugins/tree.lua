@@ -43,6 +43,13 @@ return {
     },
     renderer = {
       root_folder_label = false,
+      highlight_git = 'name',
+      icons = {
+        show = { git = false },
+      },
+    },
+    git = {
+      enable = true,
     },
   },
 }
