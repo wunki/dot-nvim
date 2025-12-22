@@ -38,14 +38,13 @@ vim.opt.shortmess:append 'I'
 -- 24 bit colors
 vim.opt.termguicolors = true
 
--- do we want line numbers? Neh...not by default
-vim.opt.number = false
+-- relative line numbers with absolute on current line
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.numberwidth = 4
 
 -- save undo history
 vim.opt.undofile = true
-
--- keep signcolumn on by default
-vim.opt.signcolumn = 'yes'
 
 -- case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.opt.ignorecase = true
