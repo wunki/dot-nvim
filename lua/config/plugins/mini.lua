@@ -10,6 +10,7 @@ return {
         use_icons = false,
         content = {
           active = function()
+            if vim.bo.filetype == 'NvimTree' then return '' end
             local branch = vim.b.gitsigns_head or ''
             local diff = (function()
               local status = vim.b.gitsigns_status_dict

@@ -11,21 +11,38 @@ return {
   lazy = false,
   keys = {
     { '<leader>ft', '<cmd>NvimTreeFindFile<cr>', desc = 'Find file in filetree' },
-    { '<C-n>', '<cmd>NvimTreeToggle<cr>', desc = 'Find file in filetree' },
+    { '<C-n>', '<cmd>NvimTreeToggle<cr>', desc = 'Toggle filetree' },
   },
-  ---@module "neo-tree"
-  ---@type neotree.Config?
+  config = function(_, opts)
+    require('nvim-tree').setup(opts)
+
+    local group = vim.api.nvim_create_augroup('nvimtree-statusline', { clear = true })
+    vim.api.nvim_create_autocmd('BufEnter', {
+      group = group,
+      pattern = 'NvimTree_*',
+      callback = function()
+        vim.wo.statusline = '%#Normal#'
+        vim.wo.laststatus = 0
+      end,
+    })
+    vim.api.nvim_create_autocmd('BufLeave', {
+      group = group,
+      pattern = 'NvimTree_*',
+      callback = function()
+        vim.o.laststatus = 2
+      end,
+    })
+  end,
   opts = {
     filters = {
       custom = { '.git', 'node_modules', '.vscode' },
       dotfiles = true,
     },
-    git = {},
     view = {
       adaptive_size = true,
-      float = {
-        enable = false,
-      },
+    },
+    renderer = {
+      root_folder_label = false,
     },
   },
 }

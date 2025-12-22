@@ -24,6 +24,11 @@ function M.setup()
     vim.opt.number = not vim.o.number
   end, { desc = 'Toggle line numbers' })
 
+  -- toggle statusline
+  vim.keymap.set('n', '<space>ub', function()
+    vim.o.laststatus = vim.o.laststatus == 0 and 2 or 0
+  end, { desc = 'Toggle statusline' })
+
   -- switch colorschemes
   vim.keymap.set('n', '<space>us', function()
     if vim.g.colors_name == 'zenbones' then
