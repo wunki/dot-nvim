@@ -2,63 +2,48 @@ return {
   {
     'echasnovski/mini.nvim',
     keys = {
-      {
-        '<leader>fm',
-        function()
-          require('mini.files').open()
-        end,
-        desc = 'Open MiniFiles',
-      },
+      { '<leader>fm', function() require('mini.files').open() end, desc = 'Open MiniFiles' },
     },
-
     config = function()
-      -- statusline
       local statusline = require 'mini.statusline'
       statusline.setup {
         use_icons = false,
         content = {
           active = function()
-            local git = MiniStatusline.section_git { trunc_width = 40 }
-            local diff = MiniStatusline.section_diff { trunc_width = 75 }
-            local diagnostics = MiniStatusline.section_diagnostics { trunc_width = 75 }
-            local lsp_icon = (function()
-              local clients = {}
-              if vim.lsp.get_clients then
-                clients = vim.lsp.get_clients { bufnr = 0 }
-              else
-                clients = vim.lsp.get_active_clients { bufnr = 0 }
-              end
-              return (clients and #clients > 0) and '⚙' or ''
+            local branch = vim.b.gitsigns_head or ''
+            local diff = (function()
+              local status = vim.b.gitsigns_status_dict
+              if not status then return '' end
+              local parts = {}
+              if (status.added or 0) > 0 then table.insert(parts, '%#diffAdded#+' .. status.added .. '%*') end
+              if (status.changed or 0) > 0 then table.insert(parts, '%#DiagnosticWarn#~' .. status.changed .. '%*') end
+              if (status.removed or 0) > 0 then table.insert(parts, '%#diffRemoved#-' .. status.removed .. '%*') end
+              return table.concat(parts, ' ')
             end)()
-            local devinfo = table.concat(
-              vim.tbl_filter(function(s)
-                return s ~= nil and s ~= ''
-              end, { git, diff, diagnostics, lsp_icon }),
-              ' '
-            )
-            local filename = MiniStatusline.section_filename { trunc_width = 140 }
-
-            local location = tostring(vim.fn.line '.')
+            local diagnostics = MiniStatusline.section_diagnostics { trunc_width = 75 }
+            local lsp = #vim.lsp.get_clients { bufnr = 0 } > 0 and '󰒋' or ''
+            local devinfo = table.concat(vim.tbl_filter(function(s) return s ~= '' end, { diagnostics, lsp }), ' ')
+            local filename = vim.fn.expand '%:.'
+            local modified = vim.bo.modified and '●' or ''
+            local search = MiniStatusline.section_searchcount { trunc_width = 75 }
+            local location = vim.fn.line('.') .. ':' .. vim.fn.col('.')
 
             return MiniStatusline.combine_groups {
-
-              { hl = 'MiniStatuslineDevinfo', strings = { devinfo } },
-              '%<', -- Mark general truncate point
-              { hl = 'MiniStatuslineFilename', strings = { filename } },
-              '%=', -- End left alignment
-              { hl = 'MiniStatuslineModeNormal', strings = { location } },
+              devinfo ~= '' and { hl = 'MiniStatuslineDevinfo', strings = { devinfo } } or '',
+              '%<',
+              { hl = 'MiniStatuslineFilename', strings = { filename, modified } },
+              '%=',
+              search ~= '' and { hl = 'MiniStatuslineFileinfo', strings = { search } } or '',
+              diff ~= '' and { strings = { diff } } or '',
+              branch ~= '' and { hl = 'MiniStatuslineModeInsert', strings = { branch } } or '',
+              { hl = 'MiniStatuslineDevinfo', strings = { location } },
             }
           end,
         },
       }
 
-      -- files
-      local files = require 'mini.files'
-      files.setup()
-
-      -- comment
-      local comment = require 'mini.comment'
-      comment.setup()
+      require('mini.files').setup()
+      require('mini.comment').setup()
     end,
   },
 }
