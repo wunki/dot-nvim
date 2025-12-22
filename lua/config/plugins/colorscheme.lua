@@ -8,7 +8,7 @@ local function reload_finde()
   end
   -- Clear highlights and reload
   vim.cmd 'highlight clear'
-  require('finde').setup {}
+  require('finde').setup { gutter = true }
   vim.cmd.colorscheme 'finde'
   vim.notify('Reloaded finde colorscheme', vim.log.levels.INFO)
 end
@@ -18,15 +18,15 @@ vim.g.reload_finde = reload_finde
 
 return {
   {
-    dir = '/Users/petar/Code/finde.nvim',
+    dir = '~/Code/finde.nvim',
     name = 'finde',
     lazy = false,
     priority = 1000,
     config = function()
-      require('finde').setup {}
+      require('finde').setup { gutter = false }
       vim.cmd.colorscheme 'finde'
 
-      -- Keybinding to reload finde colorscheme
+      -- Keybinding to reload my colorscheme
       vim.keymap.set('n', '<leader>ur', reload_finde, { desc = 'Reload finde colorscheme' })
     end,
   },
@@ -50,7 +50,7 @@ return {
       update_interval = 1000,
       set_dark_mode = function()
         vim.cmd 'highlight clear'
-        vim.cmd.colorscheme 'finde'
+        vim.cmd.colorscheme 'finde-dark'
         vim.opt.background = 'dark'
       end,
       set_light_mode = function()
