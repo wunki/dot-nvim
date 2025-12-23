@@ -21,11 +21,7 @@ return {
     -- completions when requested.
     keymap = {
       preset = 'default',
-      ['<C-space>'] = {
-        function(cmp)
-          cmp.show()
-        end,
-      },
+      ['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
     },
 
     appearance = {
@@ -36,7 +32,7 @@ return {
     signature = { enabled = true },
 
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'buffer' },
+      default = { 'lsp', 'path', 'buffer' },
     },
     cmdline = {
       enabled = false,
