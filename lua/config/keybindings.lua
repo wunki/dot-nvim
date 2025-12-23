@@ -21,7 +21,9 @@ function M.setup()
 
   -- toggle line numbers
   vim.keymap.set('n', '<space>ul', function()
-    vim.opt.number = not vim.o.number
+    local enabled = not vim.o.number
+    vim.opt.number = enabled
+    vim.opt.relativenumber = enabled
   end, { desc = 'Toggle line numbers' })
 
   -- toggle statusline
