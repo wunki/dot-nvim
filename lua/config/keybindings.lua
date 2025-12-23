@@ -5,34 +5,34 @@ function M.setup()
   vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { desc = 'Clear search highlights' })
 
   -- run the current line
-  vim.keymap.set('n', '<space>x', function()
+  vim.keymap.set('n', '<leader>x', function()
     vim.cmd '.lua'
     vim.notify('executed current line', 2)
   end, { desc = 'Execute current line as Lua' })
 
   -- run selection
-  vim.keymap.set('v', '<space>x', ':lua<CR>', { desc = 'Execute selection as Lua' })
+  vim.keymap.set('v', '<leader>x', ':lua<CR>', { desc = 'Execute selection as Lua' })
 
   -- run the current file
-  vim.keymap.set('n', '<space><space>x', function()
+  vim.keymap.set('n', '<leader>X', function()
     vim.cmd 'source %'
     vim.notify('sourced current file', 2)
   end, { desc = 'Source current file' })
 
   -- toggle line numbers
-  vim.keymap.set('n', '<space>ul', function()
+  vim.keymap.set('n', '<leader>ul', function()
     local enabled = not vim.o.number
     vim.opt.number = enabled
     vim.opt.relativenumber = enabled
   end, { desc = 'Toggle line numbers' })
 
   -- toggle statusline
-  vim.keymap.set('n', '<space>ub', function()
+  vim.keymap.set('n', '<leader>ub', function()
     vim.o.laststatus = vim.o.laststatus == 0 and 2 or 0
   end, { desc = 'Toggle statusline' })
 
   -- switch colorschemes
-  vim.keymap.set('n', '<space>us', function()
+  vim.keymap.set('n', '<leader>us', function()
     if vim.g.colors_name == 'zenbones' then
       vim.cmd 'highlight clear'
       vim.cmd 'colorscheme finde'
@@ -59,8 +59,12 @@ function M.setup()
   -- Register which-key groups
   local wk = require 'which-key'
   wk.add {
+    { '<leader>f', group = 'Find' },
+    { '<leader>g', group = 'Git' },
+    { '<leader>h', group = 'Harpoon' },
+    { '<leader>l', group = 'LSP' },
+    { '<leader>o', group = 'Opencode' },
     { '<leader>u', group = 'UI' },
-    { '<leader>l', group = 'LSP/Lazy' },
   }
 end
 

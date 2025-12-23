@@ -57,66 +57,80 @@ npm install -g prettier-plugin-svelte
 
 ## ⌨️ Key Bindings
 
+Leader key is `<Space>`. All bindings below use `<leader>` prefix unless otherwise noted.
+
 ### General
 
 | Key | Description |
 |-----|-------------|
 | `<Esc>` | Clear search highlights |
-| `<Space>ul` | Toggle line numbers |
+| `<leader>x` | Execute current line as Lua |
+| `<leader>x` (visual) | Execute selection as Lua |
+| `<leader>X` | Source current file |
 
-### Lua Execution
-
-| Key | Description |
-|-----|-------------|
-| `<Space>x` | Execute current line as Lua |
-| `<Space>x` (visual) | Execute selection as Lua |
-| `<Space><Space>x` | Source current file |
-
-### File Navigation
+### UI Toggles (`<leader>u`)
 
 | Key | Description |
 |-----|-------------|
-| `<Space>fm` | Open Mini.files file browser |
-| `<Space>ft` | Find file in file tree |
-| `<C-n>` | Toggle file tree |
+| `<leader>ul` | Toggle line numbers |
+| `<leader>ub` | Toggle statusline |
+| `<leader>us` | Toggle colorscheme (dark/light) |
 
-### Telescope Fuzzy Finding
-
-| Key | Description |
-|-----|-------------|
-| `<Space>ff` | Find files in current directory |
-| `<Space>fc` | Find Neovim config files |
-| `<Space>fd` | Find dotfiles |
-| `<Space>fh` | Help tags |
-| `<Space>fg` | Live grep in files |
-
-### LSP (Code Intelligence)
+### Find (`<leader>f`)
 
 | Key | Description |
 |-----|-------------|
+| `<leader>ff` | Find git files |
+| `<leader>fF` | Find all files |
+| `<leader>fc` | Find config files |
+| `<leader>fd` | Find dotfiles |
+| `<leader>fg` | Find by grep |
+| `<leader>fh` | Find help tags |
+| `<leader>fs` | Find colorscheme |
+
+### Harpoon (`<leader>h`)
+
+| Key | Description |
+|-----|-------------|
+| `<leader>ha` | Add file to harpoon |
+| `<leader>hh` | Quick menu |
+| `<leader>hf` | Find marks |
+| `<leader>h1-5` | Go to file 1-5 |
+
+### Git (`<leader>g`)
+
+| Key | Description |
+|-----|-------------|
+| `<leader>gg` | LazyGit |
+| `<leader>gy` | Open line in GitHub |
+| `<leader>gy` (visual) | Open selection in GitHub |
+
+### LSP (`<leader>l` and `g` prefix)
+
+| Key | Description |
+|-----|-------------|
+| `<leader>li` | Show attached LSP clients |
 | `gd` | Go to definition |
 | `grn` | Rename symbol |
 | `gra` | Code action |
 | `grr` | Find references |
 | `gri` | Go to implementation |
-| `gO` | Document symbol |
+| `gO` | Document symbols |
 
-### Harpoon (File Bookmarking)
-
-| Key | Description |
-|-----|-------------|
-| `<leader>A` | Add file to harpoon |
-| `<leader>a` | Toggle harpoon quick menu |
-| `<leader>ft` | Find harpoon marks with Telescope |
-| `<leader>1-5` | Jump to harpoon file 1-5 |
-
-### Git Integration
+### Opencode (`<leader>o`)
 
 | Key | Description |
 |-----|-------------|
-| `<leader>lg` | Open LazyGit |
-| `<leader>gy` | Open current line in GitHub |
-| `<leader>gy` (visual) | Open selected lines in GitHub |
+| `<leader>oo` | Toggle opencode |
+| `<leader>oa` | Ask opencode |
+| `<leader>os` | Select opencode action |
+| `<leader>op` | Add to opencode prompt |
+
+### File Navigation
+
+| Key | Description |
+|-----|-------------|
+| `<C-n>` | Toggle file tree |
 
 ### Code Completion
 

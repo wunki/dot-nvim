@@ -21,42 +21,42 @@ return {
     local P = Snacks.picker
 
     -- find git files (includes files in hidden directories like .github)
-    vim.keymap.set('n', '<space>ff', function()
+    vim.keymap.set('n', '<leader>ff', function()
       P.git_files()
     end, { desc = 'Find git files' })
 
     -- find all files (ignores hidden directories)
-    vim.keymap.set('n', '<space>fF', function()
+    vim.keymap.set('n', '<leader>fF', function()
       P.files { matcher = { frecency = true, sort_empty = true } }
     end, { desc = 'Find all files' })
 
     -- find my neovim config files
-    vim.keymap.set('n', '<space>fc', function()
+    vim.keymap.set('n', '<leader>fc', function()
       P.files { cwd = vim.fn.stdpath 'config' }
     end, { desc = 'Find config files' })
 
     -- find my dotfiles
-    vim.keymap.set('n', '<space>fd', function()
+    vim.keymap.set('n', '<leader>fd', function()
       P.files { cwd = vim.fn.expand '~/code/dotfiles' }
     end, { desc = 'Find dotfiles' })
 
     -- help tags
-    vim.keymap.set('n', '<space>fh', function()
+    vim.keymap.set('n', '<leader>fh', function()
       P.help()
-    end, { desc = 'Help tags' })
+    end, { desc = 'Find help tags' })
 
     -- grep
-    vim.keymap.set('n', '<space>fg', function()
+    vim.keymap.set('n', '<leader>fg', function()
       P.grep()
-    end, { desc = 'Live grep' })
+    end, { desc = 'Find by grep' })
 
     -- colorscheme picker
-    vim.keymap.set('n', '<space>fcs', function()
+    vim.keymap.set('n', '<leader>fs', function()
       P.colorschemes()
-    end, { desc = 'Pick colorscheme' })
+    end, { desc = 'Find colorscheme' })
 
     -- lazygit
-    vim.keymap.set('n', '<leader>gl', function()
+    vim.keymap.set('n', '<leader>gg', function()
       Snacks.lazygit()
     end, { desc = 'LazyGit' })
   end,

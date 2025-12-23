@@ -7,27 +7,36 @@ return {
   config = function()
     local harpoon = require 'harpoon'
 
-    -- Basic harpoon setup
-    harpoon:setup {}
+    harpoon:setup {
+      settings = {
+        key = function()
+          return vim.loop.cwd()
+        end,
+      },
+    }
+
+    local extensions = require 'harpoon.extensions'
+    harpoon:extend(extensions.builtins.navigate_with_number())
+    harpoon:extend(extensions.builtins.highlight_current_file())
   end,
   keys = {
     {
-      '<leader>A',
+      '<leader>ha',
       function()
         require('harpoon'):list():add()
       end,
-      desc = 'Add file to harpoon',
+      desc = 'Add file',
     },
     {
-      '<leader>a',
+      '<leader>hh',
       function()
         local harpoon = require 'harpoon'
         harpoon.ui:toggle_quick_menu(harpoon:list())
       end,
-      desc = 'Harpoon quick menu',
+      desc = 'Quick menu',
     },
     {
-      '<leader>ft',
+      '<leader>hf',
       function()
         local harpoon = require 'harpoon'
         local list = harpoon:list()
@@ -54,42 +63,42 @@ return {
           end,
         }
       end,
-      desc = 'Find harpoon marks',
+      desc = 'Find marks',
     },
     {
-      '<leader>1',
+      '<leader>h1',
       function()
         require('harpoon'):list():select(1)
       end,
-      desc = 'Navigate to harpoon file 1',
+      desc = 'Go to file 1',
     },
     {
-      '<leader>2',
+      '<leader>h2',
       function()
         require('harpoon'):list():select(2)
       end,
-      desc = 'Navigate to harpoon file 2',
+      desc = 'Go to file 2',
     },
     {
-      '<leader>3',
+      '<leader>h3',
       function()
         require('harpoon'):list():select(3)
       end,
-      desc = 'Navigate to harpoon file 3',
+      desc = 'Go to file 3',
     },
     {
-      '<leader>4',
+      '<leader>h4',
       function()
         require('harpoon'):list():select(4)
       end,
-      desc = 'Navigate to harpoon file 4',
+      desc = 'Go to file 4',
     },
     {
-      '<leader>5',
+      '<leader>h5',
       function()
         require('harpoon'):list():select(5)
       end,
-      desc = 'Navigate to harpoon file 5',
+      desc = 'Go to file 5',
     },
   },
 }
