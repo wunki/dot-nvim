@@ -22,7 +22,7 @@ return {
       pattern = 'NvimTree_*',
       callback = function()
         vim.wo.statusline = '%#Normal#'
-        vim.wo.laststatus = 0
+        vim.o.laststatus = 0
       end,
     })
     vim.api.nvim_create_autocmd('BufLeave', {
