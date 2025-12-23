@@ -2,6 +2,7 @@ return {
   'folke/snacks.nvim',
   event = 'VimEnter',
   opts = {
+    lazygit = { enabled = true },
     picker = {
       prompt = ' ',
       ui_select = true,
@@ -53,5 +54,10 @@ return {
     vim.keymap.set('n', '<space>fcs', function()
       P.colorschemes()
     end, { desc = 'Pick colorscheme' })
+
+    -- lazygit
+    vim.keymap.set('n', '<leader>gl', function()
+      Snacks.lazygit()
+    end, { desc = 'LazyGit' })
   end,
 }
