@@ -18,6 +18,12 @@ return {
     local extensions = require 'harpoon.extensions'
     harpoon:extend(extensions.builtins.navigate_with_number())
     harpoon:extend(extensions.builtins.highlight_current_file())
+    harpoon:extend {
+      UI_CREATE = function(cx)
+        vim.keymap.set('n', '<C-n>', 'j', { buffer = cx.bufnr })
+        vim.keymap.set('n', '<C-p>', 'k', { buffer = cx.bufnr })
+      end,
+    }
   end,
   keys = {
     {

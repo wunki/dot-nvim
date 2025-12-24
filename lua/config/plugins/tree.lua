@@ -11,7 +11,7 @@ return {
   lazy = false,
   keys = {
     { '<leader>ft', '<cmd>NvimTreeFindFile<cr>', desc = 'Find file in filetree' },
-    { '<C-n>', '<cmd>NvimTreeToggle<cr>', desc = 'Toggle filetree' },
+    { '<C-b>', '<cmd>NvimTreeToggle<cr>', desc = 'Toggle filetree' },
   },
   config = function(_, opts)
     require('nvim-tree').setup(opts)
