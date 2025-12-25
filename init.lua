@@ -71,6 +71,19 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+-- restore cursor position when reopening files
+vim.api.nvim_create_autocmd('BufReadPost', {
+  desc = 'Restore cursor position',
+  group = vim.api.nvim_create_augroup('petar-restore-cursor', { clear = true }),
+  callback = function()
+    local mark = vim.api.nvim_buf_get_mark(0, '"')
+    local line_count = vim.api.nvim_buf_line_count(0)
+    if mark[1] > 0 and mark[1] <= line_count then
+      vim.api.nvim_win_set_cursor(0, mark)
+    end
+  end,
+})
+
 -- auto-refresh files when changed externally (works even when Neovim is in background)
 -- comes in useful when working with an agent side-by-side and you want the recent
 -- changes to be reflected in Neovim at all times

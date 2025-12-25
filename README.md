@@ -12,6 +12,8 @@ A minimal yet powerful Neovim configuration focused on productivity and clean de
 - Git integration with Lazygit
 - Fast code formatting with Conform
 - Which-key for discovering keybindings
+- Auto-refresh files when changed externally (great for AI coding assistants)
+- Restore cursor position when reopening files
 
 ## 🔧 Installation
 
