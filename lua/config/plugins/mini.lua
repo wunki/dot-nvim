@@ -45,6 +45,7 @@ return {
 
       require('mini.files').setup()
       require('mini.comment').setup()
+      require('mini.pairs').setup()
     end,
   },
 }

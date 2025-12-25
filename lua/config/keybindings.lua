@@ -19,6 +19,19 @@ function M.setup()
     vim.notify('sourced current file', 2)
   end, { desc = 'Source current file' })
 
+  -- reload entire config
+  vim.keymap.set('n', '<leader>R', function()
+    -- clear config modules from cache
+    for name, _ in pairs(package.loaded) do
+      if name:match '^config' then
+        package.loaded[name] = nil
+      end
+    end
+    -- re-source init.lua
+    dofile(vim.env.MYVIMRC)
+    vim.notify('Config reloaded', vim.log.levels.INFO)
+  end, { desc = 'Reload config' })
+
   -- toggle line numbers
   vim.keymap.set('n', '<leader>ul', function()
     local enabled = not vim.o.number

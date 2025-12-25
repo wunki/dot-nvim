@@ -21,5 +21,6 @@ return {
     vim.keymap.set({ 'n', 'x' }, '<leader>os', function() opencode.select() end, { desc = 'Select opencode action' })
     vim.keymap.set({ 'n', 'x' }, '<leader>op', function() opencode.prompt('@this') end, { desc = 'Add to opencode' })
     vim.keymap.set({ 'n', 't' }, '<leader>oo', function() opencode.toggle() end, { desc = 'Toggle opencode' })
+    vim.keymap.set('n', '<leader>od', function() opencode.prompt('diagnostics') end, { desc = 'Explain diagnostics' })
   end,
 }
