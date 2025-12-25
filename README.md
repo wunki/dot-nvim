@@ -67,6 +67,7 @@ Leader key is `<Space>`. All bindings below use `<leader>` prefix unless otherwi
 | `<leader>x` | Execute current line as Lua |
 | `<leader>x` (visual) | Execute selection as Lua |
 | `<leader>X` | Source current file |
+| `<leader>R` | Reload entire config |
 
 ### UI Toggles (`<leader>u`)
 
@@ -125,12 +126,13 @@ Leader key is `<Space>`. All bindings below use `<leader>` prefix unless otherwi
 | `<leader>oa` | Ask opencode |
 | `<leader>os` | Select opencode action |
 | `<leader>op` | Add to opencode prompt |
+| `<leader>od` | Explain diagnostics |
 
 ### File Navigation
 
 | Key | Description |
 |-----|-------------|
-| `<C-n>` | Toggle file tree |
+| `<C-b>` | Toggle file tree |
 
 ### Code Completion
 
