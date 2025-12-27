@@ -4,6 +4,25 @@ return {
   priority = 1000,
   opts = {
     lazygit = { enabled = true },
+    zen = {
+      toggles = {
+        dim = true,
+        git_signs = false,
+      },
+      show = {
+        statusline = false,
+        tabline = false,
+      },
+      win = {
+        width = 100,
+        minimal = true,
+        backdrop = { transparent = false },
+        wo = {
+          wrap = true,
+          linebreak = true,
+        },
+      },
+    },
     picker = {
       prompt = ' ',
       ui_select = true,
@@ -28,5 +47,6 @@ return {
     vim.keymap.set('n', '<leader>fg', function() P.grep() end, { desc = 'Find by grep' })
     vim.keymap.set('n', '<leader>fs', function() P.colorschemes() end, { desc = 'Find colorscheme' })
     vim.keymap.set('n', '<leader>gg', function() Snacks.lazygit() end, { desc = 'LazyGit' })
+    vim.keymap.set('n', '<leader>uz', function() Snacks.zen() end, { desc = 'Toggle Zen mode' })
   end,
 }
