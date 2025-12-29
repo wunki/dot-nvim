@@ -36,7 +36,7 @@ return {
   opts = {
     filters = {
       custom = { '.git', 'node_modules', '.vscode' },
-      dotfiles = true,
+      dotfiles = false,
     },
     view = {
       adaptive_size = true,
