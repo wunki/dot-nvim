@@ -69,6 +69,17 @@ function M.setup()
     end
   end, { desc = 'Show attached LSP clients' })
 
+  -- open current file in default program
+  vim.api.nvim_create_user_command('SystemOpen', function()
+    local path = vim.fn.expand('%:p')
+    if path == '' then
+      vim.notify('Buffer has no file path', vim.log.levels.WARN)
+      return
+    end
+    vim.fn.jobstart({ 'open', path }, { detach = true })
+    vim.notify('Opening ' .. path, vim.log.levels.INFO)
+  end, { desc = 'Open current file in default system program' })
+
   -- Register which-key groups
   local wk = require 'which-key'
   wk.add {

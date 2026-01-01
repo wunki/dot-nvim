@@ -34,6 +34,24 @@ return {
     })
   end,
   opts = {
+    on_attach = function(bufnr)
+      local api = require('nvim-tree.api')
+
+      local function opts(desc)
+        return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+      end
+
+      -- default mappings
+      api.config.mappings.default_on_attach(bufnr)
+
+      -- custom mappings
+      vim.keymap.set('n', 'O', function()
+        local node = api.tree.get_node_under_cursor()
+        if node then
+          vim.fn.jobstart({ 'open', node.absolute_path }, { detach = true })
+        end
+      end, opts('Open with System Default'))
+    end,
     filters = {
       custom = { '.git', 'node_modules', '.vscode' },
       dotfiles = false,
