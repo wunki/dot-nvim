@@ -85,6 +85,7 @@ return {
           map('gra', vim.lsp.buf.code_action, 'Code Action', { 'n', 'v' })
           map('grr', vim.lsp.buf.references, 'References')
           map('gri', vim.lsp.buf.implementation, 'Implementation')
+          map('grc', vim.lsp.buf.incoming_calls, 'Incoming Calls')
           map('gO', vim.lsp.buf.document_symbol, 'Document Symbol')
         end,
       })

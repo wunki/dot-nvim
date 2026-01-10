@@ -46,6 +46,12 @@ return {
       require('mini.files').setup()
       require('mini.comment').setup()
       require('mini.pairs').setup()
+      require('mini.ai').setup {
+        custom_textobjects = {
+          f = require('mini.ai').gen_spec.treesitter { a = '@function.outer', i = '@function.inner' },
+          c = require('mini.ai').gen_spec.treesitter { a = '@class.outer', i = '@class.inner' },
+        },
+      }
     end,
   },
 }
