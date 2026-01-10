@@ -48,7 +48,7 @@ function M.setup()
   vim.keymap.set('n', '<leader>us', function()
     if vim.g.colors_name == 'zenbones' then
       vim.cmd 'highlight clear'
-      vim.cmd 'colorscheme finde'
+      vim.cmd 'colorscheme gondolin'
       vim.cmd 'set bg=dark'
     else
       vim.cmd 'highlight clear'

@@ -1,28 +1,28 @@
--- Reload the finde colorscheme (useful during development)
-local function reload_finde()
+-- Reload the gondolin colorscheme (useful during development)
+local function reload_gondolin()
   for name, _ in pairs(package.loaded) do
-    if name:match '^finde' then
+    if name:match '^gondolin' then
       package.loaded[name] = nil
     end
   end
   vim.cmd 'highlight clear'
-  require('finde').setup { gutter = true }
-  vim.cmd.colorscheme 'finde'
-  vim.notify('Reloaded finde colorscheme', vim.log.levels.INFO)
+  require('gondolin').setup { gutter = true }
+  vim.cmd.colorscheme 'gondolin'
+  vim.notify('Reloaded gondolin colorscheme', vim.log.levels.INFO)
 end
 
-vim.g.reload_finde = reload_finde
+vim.g.reload_gondolin = reload_gondolin
 
 return {
   {
-    dir = '~/Code/finde.nvim',
-    name = 'finde',
+    'wunki/gondolin.nvim',
+    name = 'gondolin',
     lazy = false,
     priority = 1000,
     config = function()
-      require('finde').setup { gutter = false }
-      vim.cmd.colorscheme 'finde'
-      vim.keymap.set('n', '<leader>ur', reload_finde, { desc = 'Reload finde colorscheme' })
+      require('gondolin').setup { gutter = false }
+      vim.cmd.colorscheme 'gondolin'
+      vim.keymap.set('n', '<leader>ur', reload_gondolin, { desc = 'Reload gondolin colorscheme' })
     end,
   },
   {
@@ -38,7 +38,7 @@ return {
       update_interval = 1000,
       set_dark_mode = function()
         vim.cmd 'highlight clear'
-        vim.cmd.colorscheme 'finde'
+        vim.cmd.colorscheme 'gondolin'
         vim.opt.background = 'dark'
       end,
       set_light_mode = function()
