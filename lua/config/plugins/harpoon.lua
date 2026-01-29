@@ -9,6 +9,7 @@ return {
 
     harpoon:setup {
       settings = {
+        save_on_toggle = true,
         key = function()
           return vim.loop.cwd()
         end,
