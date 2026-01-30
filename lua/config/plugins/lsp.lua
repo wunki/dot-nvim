@@ -44,6 +44,11 @@ return {
           filetypes = { 'c', 'cpp', 'objc', 'objcpp' },
           root_markers = { 'compile_commands.json', '.clangd', '.git' },
         },
+        gopls = {
+          cmd = { 'gopls' },
+          filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
+          root_markers = { 'go.work', 'go.mod', '.git' },
+        },
         svelte = {
           cmd = { 'svelteserver', '--stdio' },
           filetypes = { 'svelte' },

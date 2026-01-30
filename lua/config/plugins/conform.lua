@@ -16,6 +16,7 @@ return {
       typescript = biome_or_prettier,
       typescriptreact = biome_or_prettier,
       json = biome_or_prettier,
+      go = { 'goimports', 'gofmt' },
       yaml = { 'prettierd' },
       markdown = { 'prettierd' },
       html = { 'prettierd' },
