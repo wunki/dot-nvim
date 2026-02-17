@@ -50,7 +50,14 @@ return {
           root_markers = { 'package.json', 'svelte.config.js', 'svelte.config.ts', '.git' },
         },
         expert = {
-          cmd = { vim.fn.expand '~/.local/bin/expert_darwin_arm64', '--stdio' },
+          cmd = {
+            (function()
+              local uname = vim.uv.os_uname()
+              local arch = uname.machine == 'x86_64' and 'amd64' or uname.machine
+              return vim.fn.expand(('~/.local/bin/expert_%s_%s'):format(uname.sysname:lower(), arch))
+            end)(),
+            '--stdio',
+          },
           root_markers = { 'mix.exs', '.git' },
           filetypes = { 'elixir', 'eelixir', 'heex' },
         },
