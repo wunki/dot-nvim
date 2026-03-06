@@ -4,13 +4,6 @@ return {
     { 'folke/snacks.nvim', opts = { input = {}, picker = {}, terminal = {} } },
   },
   config = function()
-    ---@type opencode.Opts
-    vim.g.opencode_opts = {
-      provider = {
-        enabled = 'snacks',
-      },
-    }
-
     -- Required for opts.events.reload
     vim.o.autoread = true
 
