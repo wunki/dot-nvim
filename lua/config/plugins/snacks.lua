@@ -3,6 +3,7 @@ return {
   lazy = false,
   priority = 1000,
   opts = {
+    gitbrowse = { enabled = true },
     lazygit = { enabled = true },
     zen = {
       toggles = {
@@ -35,18 +36,17 @@ return {
       },
     },
   },
-  config = function(_, opts)
-    require('snacks').setup(opts)
-    local P = Snacks.picker
-
-    vim.keymap.set('n', '<leader>ff', function() P.files() end, { desc = 'Find files' })
-    vim.keymap.set('n', '<leader>fF', function() P.files { hidden = true, ignored = true } end, { desc = 'Find all files' })
-    vim.keymap.set('n', '<leader>fc', function() P.files { cwd = vim.fn.stdpath 'config' } end, { desc = 'Find config files' })
-    vim.keymap.set('n', '<leader>fd', function() P.files { cwd = vim.fn.expand '~/code/dotfiles' } end, { desc = 'Find dotfiles' })
-    vim.keymap.set('n', '<leader>fh', function() P.help() end, { desc = 'Find help tags' })
-    vim.keymap.set('n', '<leader>fg', function() P.grep() end, { desc = 'Find by grep' })
-    vim.keymap.set('n', '<leader>fs', function() P.colorschemes() end, { desc = 'Find colorscheme' })
-    vim.keymap.set('n', '<leader>gg', function() Snacks.lazygit() end, { desc = 'LazyGit' })
-    vim.keymap.set('n', '<leader>uz', function() Snacks.zen() end, { desc = 'Toggle Zen mode' })
-  end,
+  keys = {
+    { '<leader>ff', function() Snacks.picker.files() end, desc = 'Find files' },
+    { '<leader>fF', function() Snacks.picker.files { hidden = true, ignored = true } end, desc = 'Find all files' },
+    { '<leader>fc', function() Snacks.picker.files { cwd = vim.fn.stdpath 'config' } end, desc = 'Find config files' },
+    { '<leader>fd', function() Snacks.picker.files { cwd = vim.fn.expand '~/code/dotfiles' } end, desc = 'Find dotfiles' },
+    { '<leader>fh', function() Snacks.picker.help() end, desc = 'Find help tags' },
+    { '<leader>fg', function() Snacks.picker.grep() end, desc = 'Find by grep' },
+    { '<leader>fw', function() Snacks.picker.grep_word() end, desc = 'Find word under cursor', mode = { 'n', 'x' } },
+    { '<leader>fs', function() Snacks.picker.colorschemes() end, desc = 'Find colorscheme' },
+    { '<leader>gy', function() Snacks.gitbrowse() end, desc = 'Open in GitHub', mode = { 'n', 'v' } },
+    { '<leader>gg', function() Snacks.lazygit() end, desc = 'LazyGit' },
+    { '<leader>uz', function() Snacks.zen() end, desc = 'Toggle Zen mode' },
+  },
 }

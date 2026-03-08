@@ -1,8 +1,16 @@
+local function toggle_files(path)
+  local mf = require('mini.files')
+  if not mf.close() then mf.open(path) end
+end
+
 return {
   {
     'echasnovski/mini.nvim',
+    lazy = false,
     keys = {
-      { '<leader>fm', function() require('mini.files').open() end, desc = 'Open MiniFiles' },
+      { '<C-b>', function() toggle_files(vim.api.nvim_buf_get_name(0)) end, desc = 'Toggle file explorer (current file)' },
+      { '<leader>ft', function() toggle_files(vim.api.nvim_buf_get_name(0)) end, desc = 'Find file in tree' },
+      { '<leader>fm', function() toggle_files(vim.uv.cwd()) end, desc = 'File explorer (cwd)' },
     },
     config = function()
       local statusline = require 'mini.statusline'
@@ -10,7 +18,6 @@ return {
         use_icons = false,
         content = {
           active = function()
-            if vim.bo.filetype == 'NvimTree' then return '' end
             local branch = vim.b.gitsigns_head or ''
             local diff = (function()
               local status = vim.b.gitsigns_status_dict
@@ -44,8 +51,8 @@ return {
       }
 
       require('mini.files').setup()
-      require('mini.comment').setup()
       require('mini.pairs').setup()
+      require('mini.surround').setup()
       require('mini.ai').setup {
         custom_textobjects = {
           f = require('mini.ai').gen_spec.treesitter { a = '@function.outer', i = '@function.inner' },
