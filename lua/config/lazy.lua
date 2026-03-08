@@ -23,8 +23,8 @@ vim.g.maplocalleader = '\\'
 
 -- Setup lazy.nvim
 require('lazy').setup {
-  'tpope/vim-sleuth', -- detect tabstop and shiftwidth automatically.
   spec = {
+    'tpope/vim-sleuth',
     { import = 'config.plugins' },
   },
   change_detection = { notify = false },

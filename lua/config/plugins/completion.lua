@@ -4,8 +4,6 @@ return {
 
   version = '*',
 
-  ---@module 'blink.cmp'
-  ---@type blink.cmp.Config
   opts = {
     completion = {
       menu = {
@@ -17,15 +15,12 @@ return {
       },
     },
 
-    -- we don't polute the buffer and only trigger
-    -- completions when requested.
     keymap = {
       preset = 'default',
       ['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
     },
 
     appearance = {
-      use_nvim_cmp_as_default = true,
       nerd_font_variant = 'mono',
     },
 

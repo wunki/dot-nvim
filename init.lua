@@ -35,13 +35,9 @@ vim.opt.listchars = {
 -- no startup message
 vim.opt.shortmess:append 'I'
 
--- 24 bit colors
-vim.opt.termguicolors = true
-
 -- relative line numbers with absolute on current line
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.numberwidth = 4
 
 -- save undo history
 vim.opt.undofile = true
@@ -84,35 +80,12 @@ vim.api.nvim_create_autocmd('BufReadPost', {
   end,
 })
 
--- auto-refresh files when changed externally (works even when Neovim is in background)
--- comes in useful when working with an agent side-by-side and you want the recent
--- changes to be reflected in Neovim at all times
+-- auto-refresh files when changed externally (useful when working with an agent side-by-side)
 vim.opt.autoread = true
-do
-  local w = vim.uv.new_fs_event()
-  if w then
-    local function watch(path)
-      w:stop()
-      w:start(
-        path,
-        {},
-        vim.schedule_wrap(function()
-          vim.cmd 'checktime'
-          watch(path) -- restart watcher (editors may replace files instead of modifying)
-        end)
-      )
-    end
-    vim.api.nvim_create_autocmd('BufEnter', {
-      group = vim.api.nvim_create_augroup('petar-file-watcher', { clear = true }),
-      callback = function()
-        local path = vim.api.nvim_buf_get_name(0)
-        if path ~= '' and vim.uv.fs_stat(path) then
-          watch(path)
-        end
-      end,
-    })
-  end
-end
+vim.api.nvim_create_autocmd({ 'FocusGained', 'BufEnter', 'CursorHold' }, {
+  group = vim.api.nvim_create_augroup('petar-file-watcher', { clear = true }),
+  command = 'silent! checktime',
+})
 
 -- Setup keybindings
-require('config.keybindings').setup()
+require 'config.keybindings'

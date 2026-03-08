@@ -1,11 +1,5 @@
 return {
-  {
-    -- Dependencies for LSP functionality
-    { 'j-hui/fidget.nvim', opts = {} }, -- useful notifications
-  },
-  {
-    'saghen/blink.cmp', -- autocompletion
-  },
+  { 'j-hui/fidget.nvim', event = 'LspAttach', opts = {} },
   {
     'folke/lazydev.nvim',
     ft = 'lua',
@@ -78,7 +72,7 @@ return {
         end
       end
 
-      -- setup formatting on save for every lsp that supports it.
+      -- LSP keymaps (buffer-local)
       vim.api.nvim_create_autocmd('LspAttach', {
         callback = function(args)
           -- Easily create a mapping.
@@ -87,18 +81,25 @@ return {
             vim.keymap.set(mode, keys, func, { buffer = args.buf, desc = 'LSP: ' .. desc })
           end
 
-          -- custom mappings
-          map('gd', function()
-            Snacks.picker.lsp_definitions()
-          end, '[G]oto [D]efinition')
+          -- gd via Snacks picker for preview support
+          map('gd', function() Snacks.picker.lsp_definitions() end, 'Go to definition')
 
-          -- these are now the default mappings in HEAD
-          map('grn', vim.lsp.buf.rename, 'Rename')
-          map('gra', vim.lsp.buf.code_action, 'Code Action', { 'n', 'v' })
-          map('grr', vim.lsp.buf.references, 'References')
-          map('gri', vim.lsp.buf.implementation, 'Implementation')
-          map('grc', vim.lsp.buf.incoming_calls, 'Incoming Calls')
-          map('gO', vim.lsp.buf.document_symbol, 'Document Symbol')
+          -- grc is not a default, the rest (grn, gra, grr, gri, gO) are built-in since 0.11
+          map('grc', vim.lsp.buf.incoming_calls, 'Incoming calls')
+
+          map('<leader>ld', function() Snacks.picker.diagnostics() end, 'Diagnostics')
+          map('<leader>lD', function() Snacks.picker.diagnostics_buffer() end, 'Buffer diagnostics')
+
+          map('<leader>lr', function()
+            local clients = vim.lsp.get_clients { bufnr = args.buf }
+            for _, c in ipairs(clients) do
+              c:stop()
+            end
+            vim.defer_fn(function()
+              vim.cmd 'edit'
+              vim.notify 'LSP clients restarted'
+            end, 300)
+          end, 'Restart clients')
         end,
       })
 
@@ -118,15 +119,6 @@ return {
         virtual_text = {
           source = 'if_many',
           spacing = 2,
-          format = function(diagnostic)
-            local diagnostic_message = {
-              [vim.diagnostic.severity.ERROR] = diagnostic.message,
-              [vim.diagnostic.severity.WARN] = diagnostic.message,
-              [vim.diagnostic.severity.INFO] = diagnostic.message,
-              [vim.diagnostic.severity.HINT] = diagnostic.message,
-            }
-            return diagnostic_message[diagnostic.severity]
-          end,
         },
       }
     end,

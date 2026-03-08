@@ -1,18 +1,3 @@
--- Reload the gondolin colorscheme (useful during development)
-local function reload_gondolin()
-  for name, _ in pairs(package.loaded) do
-    if name:match '^gondolin' then
-      package.loaded[name] = nil
-    end
-  end
-  vim.cmd 'highlight clear'
-  require('gondolin').setup { gutter = true }
-  vim.cmd.colorscheme 'gondolin'
-  vim.notify('Reloaded gondolin colorscheme', vim.log.levels.INFO)
-end
-
-vim.g.reload_gondolin = reload_gondolin
-
 return {
   {
     'wunki/gondolin.nvim',
@@ -22,7 +7,18 @@ return {
     config = function()
       require('gondolin').setup { gutter = false }
       vim.cmd.colorscheme 'gondolin'
-      vim.keymap.set('n', '<leader>ur', reload_gondolin, { desc = 'Reload gondolin colorscheme' })
+
+      vim.keymap.set('n', '<leader>ur', function()
+        for name, _ in pairs(package.loaded) do
+          if name:match '^gondolin' then
+            package.loaded[name] = nil
+          end
+        end
+        vim.cmd 'highlight clear'
+        require('gondolin').setup { gutter = false }
+        vim.cmd.colorscheme 'gondolin'
+        vim.notify('Reloaded gondolin colorscheme', vim.log.levels.INFO)
+      end, { desc = 'Reload gondolin colorscheme' })
     end,
   },
   {
@@ -35,7 +31,7 @@ return {
     'f-person/auto-dark-mode.nvim',
     enabled = vim.fn.has 'mac' == 1,
     opts = {
-      update_interval = 1000,
+      update_interval = 3000,
       set_dark_mode = function()
         vim.cmd 'highlight clear'
         vim.cmd.colorscheme 'gondolin'

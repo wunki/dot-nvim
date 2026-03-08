@@ -3,17 +3,11 @@ return {
   dependencies = {
     { 'folke/snacks.nvim', opts = { input = {}, picker = {}, terminal = {} } },
   },
-  config = function()
-    -- Required for opts.events.reload
-    vim.o.autoread = true
-
-    local opencode = require 'opencode'
-
-    -- Keybindings for opencode operations
-    vim.keymap.set({ 'n', 'x' }, '<leader>oa', function() opencode.ask('@this: ', { submit = true }) end, { desc = 'Ask opencode' })
-    vim.keymap.set({ 'n', 'x' }, '<leader>os', function() opencode.select() end, { desc = 'Select opencode action' })
-    vim.keymap.set({ 'n', 'x' }, '<leader>op', function() opencode.prompt('@this') end, { desc = 'Add to opencode' })
-    vim.keymap.set({ 'n', 't' }, '<leader>oo', function() opencode.toggle() end, { desc = 'Toggle opencode' })
-    vim.keymap.set('n', '<leader>od', function() opencode.prompt('diagnostics') end, { desc = 'Explain diagnostics' })
-  end,
+  keys = {
+    { '<leader>oa', function() require('opencode').ask('@this: ', { submit = true }) end, mode = { 'n', 'x' }, desc = 'Ask opencode' },
+    { '<leader>os', function() require('opencode').select() end, mode = { 'n', 'x' }, desc = 'Select opencode action' },
+    { '<leader>op', function() require('opencode').prompt('@this') end, mode = { 'n', 'x' }, desc = 'Add to opencode' },
+    { '<leader>oo', function() require('opencode').toggle() end, mode = { 'n', 't' }, desc = 'Toggle opencode' },
+    { '<leader>od', function() require('opencode').prompt('diagnostics') end, desc = 'Explain diagnostics' },
+  },
 }
