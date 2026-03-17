@@ -43,10 +43,20 @@ return {
           filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
           root_markers = { 'go.work', 'go.mod', '.git' },
         },
+        rust_analyzer = {
+          cmd = { 'rust-analyzer' },
+          filetypes = { 'rust' },
+          root_markers = { 'Cargo.toml', 'rust-project.json', '.git' },
+        },
         svelte = {
           cmd = { 'svelteserver', '--stdio' },
           filetypes = { 'svelte' },
           root_markers = { 'package.json', 'svelte.config.js', 'svelte.config.ts', '.git' },
+        },
+        clojure_lsp = {
+          cmd = { 'clojure-lsp' },
+          filetypes = { 'clojure', 'edn' },
+          root_markers = { 'project.clj', 'deps.edn', 'build.boot', 'shadow-cljs.edn', 'bb.edn', '.git' },
         },
         expert = {
           cmd = {
@@ -98,7 +108,7 @@ return {
             vim.defer_fn(function()
               vim.cmd 'edit'
               vim.notify 'LSP clients restarted'
-            end, 300)
+            end, 100)
           end, 'Restart clients')
         end,
       })

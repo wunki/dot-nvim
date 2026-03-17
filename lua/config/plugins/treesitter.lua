@@ -1,5 +1,6 @@
 return {
   'nvim-treesitter/nvim-treesitter',
+  event = { 'BufReadPost', 'BufNewFile' },
   build = ':TSUpdate',
   config = function()
     require('nvim-treesitter.configs').setup {
@@ -21,8 +22,11 @@ return {
         'tsx',
         'html',
         'markdown',
+        'rust',
+        'toml',
         'astro',
         'svelte',
+        'clojure',
       },
       highlight = { enable = true },
       incremental_selection = {

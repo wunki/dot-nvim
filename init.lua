@@ -49,6 +49,15 @@ vim.opt.smartcase = true
 -- minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
+-- prevent layout shift when diagnostics/gitsigns appear
+vim.opt.signcolumn = 'yes'
+
+-- smooth scrolling on ctrl-d/ctrl-u
+vim.opt.smoothscroll = true
+
+-- ctrl-o/ctrl-i behave like browser back/forward
+vim.opt.jumpoptions = 'stack'
+
 -- decrease update time
 vim.opt.updatetime = 250
 

@@ -24,8 +24,7 @@ return {
   {
     'kepano/flexoki-neovim',
     name = 'flexoki',
-    lazy = false,
-    priority = 1000,
+    lazy = true,
   },
   {
     'f-person/auto-dark-mode.nvim',
