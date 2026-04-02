@@ -22,8 +22,8 @@ return {
     end,
   },
   {
-    'kepano/flexoki-neovim',
-    name = 'flexoki',
+    'savq/melange-nvim',
+    name = 'melange',
     lazy = true,
   },
   {
@@ -38,7 +38,7 @@ return {
       end,
       set_light_mode = function()
         vim.cmd 'highlight clear'
-        vim.cmd.colorscheme 'flexoki-light'
+        vim.cmd.colorscheme 'melange'
         vim.opt.background = 'light'
       end,
     },
