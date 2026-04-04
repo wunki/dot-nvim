@@ -88,7 +88,7 @@ return {
           -- Easily create a mapping.
           local map = function(keys, func, desc, mode)
             mode = mode or 'n'
-            vim.keymap.set(mode, keys, func, { buffer = args.buf, desc = 'LSP: ' .. desc })
+            vim.keymap.set(mode, keys, func, { buf = args.buf, desc = 'LSP: ' .. desc })
           end
 
           -- gd via Snacks picker for preview support
