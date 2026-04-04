@@ -36,8 +36,8 @@ vim.opt.listchars = {
 vim.opt.shortmess:append 'I'
 
 -- relative line numbers with absolute on current line
-vim.opt.number = true
-vim.opt.relativenumber = true
+vim.opt.number = false
+vim.opt.relativenumber = false
 
 -- save undo history
 vim.opt.undofile = true
