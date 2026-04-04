@@ -3,6 +3,15 @@ return {
   dependencies = {
     { 'folke/snacks.nvim', opts = { input = {}, picker = {}, terminal = {} } },
   },
+  init = function()
+    vim.g.opencode_opts = {
+      server = {
+        start = false,
+        stop = false,
+        toggle = false,
+      },
+    }
+  end,
   keys = {
     {
       '<leader>oa',
