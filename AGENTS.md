@@ -8,7 +8,7 @@ This is a personal Neovim configuration written in Lua, using lazy.nvim as the p
 
 - Fast startup through lazy-loading
 - Minimal, clean design
-- Modern LSP integration
+- Modern LSP integration (native, no nvim-lspconfig)
 - Productivity-focused keybindings
 
 ## Project Structure
@@ -20,17 +20,22 @@ This is a personal Neovim configuration written in Lua, using lazy.nvim as the p
 │   ├── lazy.lua                # Plugin manager bootstrap and setup
 │   ├── keybindings.lua         # Global keybinding definitions
 │   └── plugins/                # Individual plugin configurations
+│       ├── claudecode.lua
+│       ├── clojure.lua
 │       ├── colorscheme.lua
-│       ├── completion.lua
+│       ├── completion.lua      # blink.cmp
 │       ├── conform.lua         # Code formatting
+│       ├── gitsigns.lua
+│       ├── harpoon.lua
 │       ├── lsp.lua             # Language server configuration
+│       ├── markdown.lua        # render-markdown.nvim
+│       ├── mini.lua
+│       ├── opencode.lua
+│       ├── snacks.lua          # Snacks pickers, dashboard, etc.
+│       ├── todo-comments.lua
 │       ├── treesitter.lua
-│       └── ...
-├── after/ftplugin/             # Filetype-specific settings
-│   ├── lua.lua
-│   ├── svelte.lua
-│   └── ...
-└── after/plugin/               # Post-load plugin configurations
+│       └── which-key.lua
+└── after/queries/              # Custom treesitter queries
 ```
 
 ## Code Style and Conventions
@@ -68,11 +73,11 @@ return {
 - Use the `vim.keymap.set()` API
 
 Keybinding namespaces:
-- `<leader>f` - File/find operations (telescope, file browser)
-- `<leader>u` - UI toggles (line numbers, colorscheme)
-- `<leader>l` - Lazy/git operations
+- `<leader>x` / `<leader>X` - Execute current line / source current file as Lua
+- `<leader>u` - UI toggles (line numbers, statusline)
+- `<leader>l` - LSP operations (diagnostics, restart)
 - `g` prefix - Go-to operations (LSP navigation)
-- `gr` prefix - LSP refactoring (rename, references, actions)
+- `gr` prefix - LSP refactoring (rename, references, actions, incoming calls)
 
 ### LSP Configuration
 
@@ -80,11 +85,11 @@ Keybinding namespaces:
 - Servers are expected to be installed globally (not via Mason)
 - Use `vim.lsp.config()` and `vim.lsp.enable()` for server setup
 - Capabilities are extended with blink.cmp for autocompletion
+- Servers only enabled if their binary is found in PATH
 
 ### Filetype Settings
 
-- Filetype-specific settings go in `after/ftplugin/<filetype>.lua`
-- Use `vim.opt_local` for buffer-local options
+- Custom treesitter queries go in `after/queries/`
 
 ## Making Changes
 
@@ -99,7 +104,7 @@ Keybinding namespaces:
 
 1. Add the server configuration to the `servers` table in `lua/config/plugins/lsp.lua`
 2. Include `cmd`, `filetypes`, and `root_markers` as needed
-3. Ensure the language server binary is available in PATH
+3. Ensure the language server binary is available in PATH (servers are auto-skipped if not found)
 
 ### Modifying Keybindings
 
@@ -109,7 +114,7 @@ Keybinding namespaces:
 
 ## Testing Changes
 
-1. Source the current file with `<Space><Space>x` to reload Lua modules
+1. Execute current line with `<leader>x` or source current file with `<leader>X`
 2. Run `:Lazy` to check plugin status
 3. Use `:checkhealth` to verify LSP and plugin health
 4. Check `:messages` for any errors
@@ -118,13 +123,14 @@ Keybinding namespaces:
 
 External tools expected to be available:
 
-- **Formatters**: stylua, prettierd, fish_indent
-- **Language Servers**: lua_ls, biome, typescript-language-server, clangd, svelteserver
-- **Other**: lazygit (for git integration)
+- **Formatters**: stylua, prettierd, biome, goimports, gofmt, rustfmt, fish_indent
+- **Language Servers**: lua_ls, biome, typescript-language-server (ts_ls), clangd, gopls, rust-analyzer, svelteserver, clojure-lsp, expert (Elixir)
+- **Other**: lazygit (for git integration), tree-sitter CLI (for parser compilation)
 
 ## Important Notes
 
 - This config uses Neovim's native LSP (not nvim-lspconfig plugin wrapper)
-- Format on save is enabled by default via conform.nvim
+- Format on save is enabled by default via conform.nvim (biome preferred over prettier when `biome.json` present)
 - The configuration assumes a modern terminal with 24-bit color support
-- Line numbers are disabled by default (toggle with `<Space>ul`)
+- Relative line numbers are enabled by default (toggle with `<leader>ul`)
+- Treesitter uses the new `nvim-treesitter` main branch (Neovim 0.12+)
