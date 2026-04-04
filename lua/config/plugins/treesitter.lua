@@ -3,7 +3,7 @@ local filetypes = {
   'lua',
   'vim',
   'fish',
-  'help',
+  'vimdoc',
   'query',
   'elixir',
   'heex',
@@ -36,6 +36,19 @@ return {
   build = ':TSUpdate',
   init = function(plugin)
     vim.opt.rtp:append(plugin.dir .. '/runtime')
+
+    local parsers = {
+      'c', 'lua', 'vim', 'fish', 'query', 'elixir', 'heex', 'css',
+      'go', 'gomod', 'gowork', 'javascript', 'typescript', 'html',
+      'markdown', 'rust', 'toml', 'astro', 'svelte', 'clojure', 'vimdoc',
+    }
+    local installed = require('nvim-treesitter.config').get_installed()
+    local to_install = vim.iter(parsers)
+      :filter(function(p) return not vim.tbl_contains(installed, p) end)
+      :totable()
+    if #to_install > 0 then
+      require('nvim-treesitter').install(to_install)
+    end
   end,
   config = function()
     local treesitter = require 'nvim-treesitter'
