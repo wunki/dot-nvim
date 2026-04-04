@@ -37,16 +37,84 @@ return {
     },
   },
   keys = {
-    { '<leader>ff', function() Snacks.picker.files() end, desc = 'Find files' },
-    { '<leader>fF', function() Snacks.picker.files { hidden = true, ignored = true } end, desc = 'Find all files' },
-    { '<leader>fc', function() Snacks.picker.files { cwd = vim.fn.stdpath 'config' } end, desc = 'Find config files' },
-    { '<leader>fd', function() Snacks.picker.files { cwd = vim.fn.expand '~/code/dotfiles' } end, desc = 'Find dotfiles' },
-    { '<leader>fh', function() Snacks.picker.help() end, desc = 'Find help tags' },
-    { '<leader>fg', function() Snacks.picker.grep() end, desc = 'Find by grep' },
-    { '<leader>fw', function() Snacks.picker.grep_word() end, desc = 'Find word under cursor', mode = { 'n', 'x' } },
-    { '<leader>fs', function() Snacks.picker.colorschemes() end, desc = 'Find colorscheme' },
-    { '<leader>gy', function() Snacks.gitbrowse() end, desc = 'Open in GitHub', mode = { 'n', 'v' } },
-    { '<leader>gg', function() Snacks.lazygit() end, desc = 'LazyGit' },
-    { '<leader>uz', function() Snacks.zen() end, desc = 'Toggle Zen mode' },
+    {
+      '<leader>ff',
+      function()
+        Snacks.picker.files()
+      end,
+      desc = 'Find files',
+    },
+    {
+      '<leader>fF',
+      function()
+        Snacks.picker.files { hidden = true, ignored = true }
+      end,
+      desc = 'Find all files',
+    },
+    {
+      '<leader>fc',
+      function()
+        Snacks.picker.files { cwd = vim.fn.stdpath 'config' }
+      end,
+      desc = 'Find config files',
+    },
+    {
+      '<leader>fd',
+      function()
+        Snacks.picker.files { cwd = vim.fn.expand '~/code/dotfiles' }
+      end,
+      desc = 'Find dotfiles',
+    },
+    {
+      '<leader>fh',
+      function()
+        Snacks.picker.help()
+      end,
+      desc = 'Find help tags',
+    },
+    {
+      '<leader>fg',
+      function()
+        Snacks.picker.grep()
+      end,
+      desc = 'Find by grep',
+    },
+    {
+      '<leader>fw',
+      function()
+        Snacks.picker.grep_word()
+      end,
+      desc = 'Find word under cursor',
+      mode = { 'n', 'x' },
+    },
+    {
+      '<leader>fs',
+      function()
+        Snacks.picker.colorschemes()
+      end,
+      desc = 'Find colorscheme',
+    },
+    {
+      '<leader>gy',
+      function()
+        Snacks.gitbrowse()
+      end,
+      desc = 'Open in GitHub',
+      mode = { 'n', 'v' },
+    },
+    {
+      '<leader>gg',
+      function()
+        Snacks.lazygit()
+      end,
+      desc = 'LazyGit',
+    },
+    {
+      '<leader>uz',
+      function()
+        Snacks.zen()
+      end,
+      desc = 'Toggle Zen mode',
+    },
   },
 }

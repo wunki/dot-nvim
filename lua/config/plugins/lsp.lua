@@ -92,13 +92,19 @@ return {
           end
 
           -- gd via Snacks picker for preview support
-          map('gd', function() Snacks.picker.lsp_definitions() end, 'Go to definition')
+          map('gd', function()
+            Snacks.picker.lsp_definitions()
+          end, 'Go to definition')
 
           -- grc is not a default, the rest (grn, gra, grr, gri, gO) are built-in since 0.11
           map('grc', vim.lsp.buf.incoming_calls, 'Incoming calls')
 
-          map('<leader>ld', function() Snacks.picker.diagnostics() end, 'Diagnostics')
-          map('<leader>lD', function() Snacks.picker.diagnostics_buffer() end, 'Buffer diagnostics')
+          map('<leader>ld', function()
+            Snacks.picker.diagnostics()
+          end, 'Diagnostics')
+          map('<leader>lD', function()
+            Snacks.picker.diagnostics_buffer()
+          end, 'Buffer diagnostics')
 
           map('<leader>lr', function()
             local clients = vim.lsp.get_clients { bufnr = args.buf }

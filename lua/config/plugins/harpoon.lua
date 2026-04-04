@@ -49,7 +49,9 @@ local keys = {
 for i = 1, 5 do
   keys[#keys + 1] = {
     '<leader>h' .. i,
-    function() require('harpoon'):list():select(i) end,
+    function()
+      require('harpoon'):list():select(i)
+    end,
     desc = 'Go to file ' .. i,
   }
 end
