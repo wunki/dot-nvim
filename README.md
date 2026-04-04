@@ -1,174 +1,220 @@
-# 🚀 Dot Neovim
+# .nvim
 
-A minimal yet powerful Neovim configuration focused on productivity and clean design.
+A minimal Neovim configuration built on native APIs and lazy-loaded plugins. Fast to start, easy to read, and small enough to understand in one sitting. As little as distractions as possible while coding.
 
-## ✨ Features
+## Why this?
 
-- Lazy-loaded plugins for fast startup time
-- Modern LSP integration for code intelligence
-- Treesitter for improved syntax highlighting
-- Fuzzy finding with Telescope
-- File navigation with Harpoon and Mini.files
-- Git integration with Lazygit
-- Fast code formatting with Conform
-- Which-key for discovering keybindings
-- Auto-refresh files when changed externally (great for AI coding assistants)
-- Restore cursor position when reopening files
+Most Neovim configurations fall into two camps: starter kits that hide complexity behind abstractions, and personal configs so tangled they're useful only to their author. This one tries to sit between them.
 
-## 🔧 Installation
+A few things it does that might save you time:
 
-1. Clone this repository to your Neovim config directory:
+- **Native LSP, no wrapper plugin.** Language servers are configured with `vim.lsp.config()` and `vim.lsp.enable()` directly. Servers that aren't installed get skipped without errors. You can read the setup in one file and understand what's happening.
+- **AI coding assistant integration.** Auto-refreshes buffers when files change on disk (for when Claude Code or similar tools edit files outside Neovim), plus dedicated keybindings for Claude Code and OpenCode.
+- **Auto dark/light mode on macOS.** Follows your system appearance setting and switches colorschemes automatically.
+- **Completion on demand.** The completion menu stays hidden until you summon it with `<C-Space>`. No popups while you think.
 
-```bash
-git clone https://github.com/yourusername/dot-nvim ~/.config/nvim
+The config is around 600 lines of Lua across 17 files. You can fork the whole thing as a starter, or pull individual files into your own setup.
+
+## Structure
+
+```
+init.lua                        Core options, autocmds, clipboard, whitespace
+lua/config/
+  lazy.lua                      Plugin manager bootstrap
+  keybindings.lua               Global keymaps (Lua execution, UI toggles, LSP info)
+  plugins/
+    lsp.lua                     Language server configs (native vim.lsp API)
+    completion.lua              blink.cmp with snippet support
+    conform.lua                 Format on save (Biome/Prettier/Stylua/rustfmt/gofmt)
+    treesitter.lua              Syntax highlighting for 20+ languages
+    snacks.lua                  Fuzzy finder, git browse, lazygit, zen mode
+    harpoon.lua                 Quick file switching (with Snacks picker integration)
+    mini.lua                    Statusline, file explorer, pairs, surround, textobjects
+    colorscheme.lua             Gondolin (dark) + Melange (light), auto-switching
+    gitsigns.lua                Git change indicators in the sign column
+    which-key.lua               Keybinding discovery popup
+    claudecode.lua              Claude Code terminal integration
+    opencode.lua                OpenCode AI assistant
+    clojure.lua                 Conjure REPL, paredit, rainbow delimiters
+    markdown.lua                Rendered markdown preview in-buffer
+    todo-comments.lua           Highlighted TODO/FIXME/HACK comments
+after/queries/
+  elixir/highlights.scm         Custom Elixir attribute highlighting
 ```
 
-2. Start Neovim. Plugins will be automatically installed.
+## Install
+
+Back up any existing config first:
 
 ```bash
+mv ~/.config/nvim ~/.config/nvim.bak
+```
+
+Clone and start Neovim:
+
+```bash
+git clone https://github.com/wunki/dot-nvim ~/.config/nvim
 nvim
 ```
 
-## 🌐 External Dependencies
+Plugins install automatically on first launch. Treesitter parsers download in the background.
 
-This setup expects language servers and formatters to be installed globally.
+## Dependencies
 
-### Language Servers
+Language servers and formatters are installed globally, not managed by Neovim. The config skips any server whose binary isn't in your PATH, so install only what you need.
 
-| Server | Languages | Install |
-|--------|-----------|---------|
-| lua-language-server | Lua | `brew install lua-language-server` |
-| typescript-language-server | JS/TS | `npm install -g typescript-language-server typescript` |
-| svelte-language-server | Svelte | `npm install -g svelte-language-server` |
-| biome | JS/TS/JSON | `npm install -g @biomejs/biome` |
-| clangd | C/C++ | `brew install llvm` or `xcode-select --install` |
+### Language servers
+
+| Server                       | Languages  | Install                                                |
+| ---------------------------- | ---------- | ------------------------------------------------------ |
+| `lua-language-server`        | Lua        | `brew install lua-language-server`                     |
+| `typescript-language-server` | JS/TS      | `npm install -g typescript-language-server typescript` |
+| `svelte-language-server`     | Svelte     | `npm install -g svelte-language-server`                |
+| `biome`                      | JS/TS/JSON | `npm install -g @biomejs/biome`                        |
+| `clangd`                     | C/C++      | `brew install llvm` or `xcode-select --install`        |
+| `gopls`                      | Go         | `go install golang.org/x/tools/gopls@latest`           |
+| `rust-analyzer`              | Rust       | `rustup component add rust-analyzer`                   |
+| `clojure-lsp`                | Clojure    | `brew install clojure-lsp/brew/clojure-lsp-native`     |
 
 ### Formatters
 
-| Formatter | Languages | Install |
-|-----------|-----------|---------|
-| stylua | Lua | `brew install stylua` |
-| prettierd | JS/TS/HTML/JSON/YAML/Markdown/Svelte | `npm install -g @fsouza/prettierd` |
-| shfmt | ZSH | `brew install shfmt` |
-| fish_indent | Fish | Included with Fish shell |
+| Formatter     | Languages                            | Install                                              |
+| ------------- | ------------------------------------ | ---------------------------------------------------- |
+| `stylua`      | Lua                                  | `brew install stylua`                                |
+| `prettierd`   | JS/TS/HTML/JSON/YAML/Markdown/Svelte | `npm install -g @fsouza/prettierd`                   |
+| `goimports`   | Go                                   | `go install golang.org/x/tools/cmd/goimports@latest` |
+| `rustfmt`     | Rust                                 | `rustup component add rustfmt`                       |
+| `fish_indent` | Fish                                 | Included with Fish shell                             |
 
-For Svelte formatting with prettier, also install the plugin:
+For Svelte formatting with Prettier:
+
 ```bash
 npm install -g prettier-plugin-svelte
 ```
 
-## ⌨️ Key Bindings
+### Other tools
 
-Leader key is `<Space>`. All bindings below use `<leader>` prefix unless otherwise noted.
+| Tool      | Purpose                            | Install                |
+| --------- | ---------------------------------- | ---------------------- |
+| `lazygit` | Git TUI (opened with `<leader>gg`) | `brew install lazygit` |
 
-### General
+## Keybindings
 
-| Key | Description |
-|-----|-------------|
-| `<Esc>` | Clear search highlights |
-| `<leader>x` | Execute current line as Lua |
-| `<leader>x` (visual) | Execute selection as Lua |
-| `<leader>X` | Source current file |
-| `<leader>R` | Reload entire config |
+Leader is `<Space>`. Local leader is `\`.
 
-### UI Toggles (`<leader>u`)
+Keybindings are discoverable at runtime: press `<leader>` and wait for the which-key popup.
 
-| Key | Description |
-|-----|-------------|
-| `<leader>ul` | Toggle line numbers |
-| `<leader>ub` | Toggle statusline |
-| `<leader>us` | Toggle colorscheme (dark/light) |
+### Navigation and files
 
-### Find (`<leader>f`)
+| Key          | Action                                    |
+| ------------ | ----------------------------------------- |
+| `<leader>ff` | Find files (respects `.gitignore`)        |
+| `<leader>fF` | Find all files (including hidden/ignored) |
+| `<leader>fg` | Grep across project                       |
+| `<leader>fw` | Grep word under cursor                    |
+| `<leader>fc` | Find Neovim config files                  |
+| `<leader>fd` | Find dotfiles                             |
+| `<leader>fh` | Search help tags                          |
+| `<leader>fT` | Find TODO comments                        |
+| `<C-b>`      | Toggle file explorer at current file      |
+| `<leader>fm` | File explorer at working directory        |
 
-| Key | Description |
-|-----|-------------|
-| `<leader>ff` | Find git files |
-| `<leader>fF` | Find all files |
-| `<leader>fc` | Find config files |
-| `<leader>fd` | Find dotfiles |
-| `<leader>fg` | Find by grep |
-| `<leader>fh` | Find help tags |
-| `<leader>fs` | Find colorscheme |
+### Harpoon (quick file switching)
 
-### Harpoon (`<leader>h`)
+| Key                | Action                     |
+| ------------------ | -------------------------- |
+| `<leader>ha`       | Add current file           |
+| `<leader>hh`       | Open quick menu            |
+| `<leader>hf`       | Fuzzy-find harpooned files |
+| `<leader>h1`..`h5` | Jump to file 1-5           |
 
-| Key | Description |
-|-----|-------------|
-| `<leader>ha` | Add file to harpoon |
-| `<leader>hh` | Quick menu |
-| `<leader>hf` | Find marks |
-| `<leader>h1-5` | Go to file 1-5 |
+### LSP
 
-### Git (`<leader>g`)
+| Key          | Action                          |
+| ------------ | ------------------------------- |
+| `gd`         | Go to definition (with preview) |
+| `grn`        | Rename symbol                   |
+| `gra`        | Code action                     |
+| `grr`        | Find references                 |
+| `gri`        | Go to implementation            |
+| `grc`        | Incoming calls                  |
+| `gO`         | Document symbols                |
+| `<leader>ld` | Project diagnostics             |
+| `<leader>lD` | Buffer diagnostics              |
+| `<leader>li` | Show attached LSP clients       |
+| `<leader>lr` | Restart LSP clients             |
 
-| Key | Description |
-|-----|-------------|
-| `<leader>gg` | LazyGit |
-| `<leader>gy` | Open line in GitHub |
-| `<leader>gy` (visual) | Open selection in GitHub |
+### Git
 
-### LSP (`<leader>l` and `g` prefix)
+| Key          | Action                                               |
+| ------------ | ---------------------------------------------------- |
+| `<leader>gg` | Open LazyGit                                         |
+| `<leader>gy` | Open current line on GitHub (visual mode: selection) |
 
-| Key | Description |
-|-----|-------------|
-| `<leader>li` | Show attached LSP clients |
-| `gd` | Go to definition |
-| `grn` | Rename symbol |
-| `gra` | Code action |
-| `grr` | Find references |
-| `gri` | Go to implementation |
-| `gO` | Document symbols |
+### AI assistants
 
-### Opencode (`<leader>o`)
+| Key          | Action                               |
+| ------------ | ------------------------------------ |
+| `<leader>ac` | Toggle Claude Code terminal          |
+| `<leader>as` | Send selection to Claude (visual)    |
+| `<leader>ab` | Add current buffer to Claude context |
+| `<leader>oo` | Toggle OpenCode                      |
+| `<leader>oa` | Ask OpenCode about current file      |
+| `<leader>os` | Select OpenCode action               |
 
-| Key | Description |
-|-----|-------------|
-| `<leader>oo` | Toggle opencode |
-| `<leader>oa` | Ask opencode |
-| `<leader>os` | Select opencode action |
-| `<leader>op` | Add to opencode prompt |
-| `<leader>od` | Explain diagnostics |
+### UI and utilities
 
-### File Navigation
+| Key          | Action                      |
+| ------------ | --------------------------- |
+| `<Esc>`      | Clear search highlights     |
+| `<leader>ul` | Toggle line numbers         |
+| `<leader>ub` | Toggle statusline           |
+| `<leader>uz` | Toggle zen mode             |
+| `<leader>ur` | Reload colorscheme          |
+| `<leader>x`  | Execute current line as Lua |
+| `<leader>X`  | Source current file         |
 
-| Key | Description |
-|-----|-------------|
-| `<C-b>` | Toggle file tree |
+## Design decisions
 
-### Code Completion
+A few choices worth knowing about if you're borrowing from this config:
 
-| Key | Description |
-|-----|-------------|
-| `<C-Space>` | Show completion menu |
+**No Mason.** Language servers and formatters live outside Neovim. This keeps the config simpler and avoids a second package manager. The tradeoff: you install tools yourself.
 
-## 🧩 Core Plugins
+**No nvim-lspconfig.** Neovim 0.11+ has `vim.lsp.config()` and `vim.lsp.enable()` built in. The extra plugin layer isn't needed anymore. Each server is a table with `cmd`, `filetypes`, and `root_markers`.
 
-- [lazy.nvim](https://github.com/folke/lazy.nvim) - Plugin manager
-- [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) - LSP configuration
-- [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) - Completion plugin
-- [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) - Fuzzy finder
-- [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) - Syntax highlighting
-- [harpoon](https://github.com/ThePrimeagen/harpoon) - File navigation
-- [which-key.nvim](https://github.com/folke/which-key.nvim) - Keybinding helper
-- [mini.nvim](https://github.com/echasnovski/mini.nvim) - Collection of small plugins
-- [lazygit.nvim](https://github.com/kdheepak/lazygit.nvim) - Git integration
-- [conform.nvim](https://github.com/stevearc/conform.nvim) - Code formatting
-- [gitlinker.nvim](https://github.com/ruifm/gitlinker.nvim) - GitHub integration
+**Snacks over Telescope.** The config uses `folke/snacks.nvim` for fuzzy finding, git browsing, lazygit, and zen mode. Fewer plugins, same coverage.
 
-## 📝 Customization
+**blink.cmp over nvim-cmp.** Faster completion engine. The menu is configured to stay hidden until manually triggered, keeping the editing experience quiet.
 
-Most configuration files are in the `lua/config/plugins/` directory. Add new plugins or modify existing ones by editing these files.
+**Mini.nvim for small utilities.** Statusline, file explorer, auto-pairs, surround, and textobjects all come from `mini.nvim` instead of five separate plugins.
 
-## 🔄 Updates
+## Customization
 
-Pull the latest changes from the repository to update:
+Add a plugin: create a file in `lua/config/plugins/` that returns a lazy.nvim spec table.
 
-```bash
-cd ~/.config/nvim
-git pull
+```lua
+-- lua/config/plugins/example.lua
+return {
+  'author/plugin-name',
+  event = 'BufRead',
+  opts = {},
+}
 ```
 
----
+Add a language server: add an entry to the `servers` table in `lua/config/plugins/lsp.lua`.
 
-💡 This configuration is maintained and optimized for personal use. Feel free to fork and customize to suit your needs!
+```lua
+your_server = {
+  cmd = { 'your-server-binary', '--stdio' },
+  filetypes = { 'your-filetype' },
+  root_markers = { 'config-file', '.git' },
+},
+```
+
+If the binary isn't found, the server is silently skipped.
+
+## Requirements
+
+- Neovim 0.12+ (uses native LSP APIs and `vim.lsp.config`)
+- Terminal with 24-bit color support
+- Git (for plugin installation)
