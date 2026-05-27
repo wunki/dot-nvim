@@ -24,22 +24,22 @@ return {
   {
     'savq/melange-nvim',
     name = 'melange',
-    lazy = true,
+    lazy = false,
   },
   {
     'f-person/auto-dark-mode.nvim',
-    enabled = vim.fn.has 'mac' == 1,
+    enabled = vim.fn.has 'mac' == 1 or vim.fn.has 'linux' == 1,
     opts = {
       update_interval = 3000,
       set_dark_mode = function()
         vim.cmd 'highlight clear'
-        vim.cmd.colorscheme 'gondolin'
         vim.opt.background = 'dark'
+        vim.cmd.colorscheme 'gondolin'
       end,
       set_light_mode = function()
         vim.cmd 'highlight clear'
-        vim.cmd.colorscheme 'melange'
         vim.opt.background = 'light'
+        vim.cmd.colorscheme 'melange'
       end,
     },
   },
