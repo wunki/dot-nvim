@@ -61,9 +61,7 @@ return {
         expert = {
           cmd = {
             (function()
-              local uname = vim.uv.os_uname()
-              local arch = uname.machine == 'x86_64' and 'amd64' or uname.machine
-              return vim.fn.expand(('~/.local/bin/expert_%s_%s'):format(uname.sysname:lower(), arch))
+              return vim.fn.expand('~/.local/bin/expert')
             end)(),
             '--stdio',
           },
