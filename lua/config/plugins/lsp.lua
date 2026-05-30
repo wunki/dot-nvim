@@ -15,6 +15,63 @@ return {
     config = function()
       -- blink autocompletion capabilities
       local capabilities = require('blink.cmp').get_lsp_capabilities()
+      local oxlint_filetypes = {
+        'javascript',
+        'javascriptreact',
+        'typescript',
+        'typescriptreact',
+        'svelte',
+      }
+      local vite_plus_root_markers = {
+        'oxfmt.config.ts',
+        'oxlint.config.ts',
+        '.oxfmtrc.json',
+        '.oxfmtrc.jsonc',
+        '.oxlintrc.json',
+        'vite.config.ts',
+        'vite.config.js',
+        'vite.config.mts',
+        'vite.config.mjs',
+        'svelte.config.ts',
+        'svelte.config.js',
+        'package.json',
+      }
+
+      local function oxlint_executable(root_dir)
+        if root_dir then
+          local local_cmd = vim.fs.joinpath(root_dir, 'node_modules', '.bin', 'oxlint')
+          if vim.fn.executable(local_cmd) == 1 then
+            return local_cmd
+          end
+        end
+
+        local global_cmd = vim.fn.exepath 'oxlint'
+        if global_cmd ~= '' then
+          return global_cmd
+        end
+
+        return nil
+      end
+
+      local oxlint = {
+        cmd = function(dispatchers, config)
+          local cmd = assert(oxlint_executable(config.root_dir), 'oxlint executable not found')
+          return vim.lsp.rpc.start({ cmd, '--lsp' }, dispatchers, { cwd = config.root_dir })
+        end,
+        root_dir = function(bufnr, on_dir)
+          local root_dir = vim.fs.root(bufnr, vite_plus_root_markers)
+          if root_dir and oxlint_executable(root_dir) then
+            on_dir(root_dir)
+          end
+        end,
+        filetypes = oxlint_filetypes,
+        init_options = {
+          settings = {
+            typeAware = false,
+            typeCheck = false,
+          },
+        },
+      }
 
       -- LSP server configurations
       local servers = {
@@ -23,11 +80,7 @@ return {
           filetypes = { 'lua' },
           root_markers = { '.luarc.json', '.luarc.jsonc', '.stylua.toml', 'stylua.toml', '.git' },
         },
-        biome = {
-          cmd = { 'biome', 'lsp-proxy' },
-          filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'json', 'jsonc' },
-          root_markers = { 'biome.json', 'biome.jsonc' },
-        },
+        oxlint = oxlint,
         ts_ls = {
           cmd = { 'typescript-language-server', '--stdio' },
           filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
@@ -61,7 +114,7 @@ return {
         expert = {
           cmd = {
             (function()
-              return vim.fn.expand('~/.local/bin/expert')
+              return vim.fn.expand '~/.local/bin/expert'
             end)(),
             '--stdio',
           },
@@ -72,8 +125,8 @@ return {
 
       -- Configure and enable each server
       for server, config in pairs(servers) do
-        local cmd = config.cmd and config.cmd[1]
-        if cmd and vim.fn.executable(cmd) == 1 then
+        local cmd = type(config.cmd) == 'table' and config.cmd[1] or nil
+        if type(config.cmd) == 'function' or (cmd and vim.fn.executable(cmd) == 1) then
           config.capabilities = capabilities
           vim.lsp.config(server, config)
           vim.lsp.enable(server)

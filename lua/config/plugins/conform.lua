@@ -1,33 +1,42 @@
-local function use_biome()
-  return vim.fs.root(0, 'biome.json') ~= nil
-end
-
-local function biome_or_prettier()
-  return use_biome() and { 'biome' } or { 'prettierd' }
-end
+local oxfmt = { 'oxfmt' }
 
 return {
   'stevearc/conform.nvim',
-  event = 'BufWritePre',
+  event = { 'BufReadPre', 'BufNewFile' },
   opts = {
     formatters_by_ft = {
       lua = { 'stylua' },
-      javascript = biome_or_prettier,
-      javascriptreact = biome_or_prettier,
-      typescript = biome_or_prettier,
-      typescriptreact = biome_or_prettier,
-      json = biome_or_prettier,
+      javascript = oxfmt,
+      javascriptreact = oxfmt,
+      typescript = oxfmt,
+      typescriptreact = oxfmt,
+      json = oxfmt,
+      jsonc = oxfmt,
       rust = { 'rustfmt' },
       go = { 'goimports', 'gofmt' },
-      yaml = { 'prettierd' },
-      markdown = { 'prettierd' },
-      html = { 'prettierd' },
-      svelte = biome_or_prettier,
+      yaml = oxfmt,
+      markdown = oxfmt,
+      html = oxfmt,
+      css = oxfmt,
+      scss = oxfmt,
+      less = oxfmt,
       fish = { 'fish_indent' },
     },
-    format_on_save = {
-      timeout_ms = 500,
-      lsp_format = 'fallback',
-    },
+    format_on_save = function(bufnr)
+      if vim.bo[bufnr].filetype == 'svelte' then
+        return {
+          timeout_ms = 3000,
+          lsp_format = 'prefer',
+          filter = function(client)
+            return client.name == 'svelte'
+          end,
+        }
+      end
+
+      return {
+        timeout_ms = 3000,
+        lsp_format = 'fallback',
+      }
+    end,
   },
 }

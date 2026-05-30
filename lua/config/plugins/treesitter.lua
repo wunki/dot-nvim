@@ -8,9 +8,13 @@ local filetypes = {
   'elixir',
   'heex',
   'css',
+  'scss',
   'go',
   'gomod',
   'gowork',
+  'json',
+  'jsonc',
+  'yaml',
   'javascript',
   'typescript',
   'javascriptreact',
@@ -46,11 +50,15 @@ return {
       'elixir',
       'heex',
       'css',
+      'scss',
       'go',
       'gomod',
       'gowork',
+      'json',
+      'yaml',
       'javascript',
       'typescript',
+      'tsx',
       'html',
       'markdown',
       'rust',
@@ -74,6 +82,7 @@ return {
   config = function()
     local treesitter = require 'nvim-treesitter'
     treesitter.setup()
+    vim.treesitter.language.register('json', 'jsonc')
 
     local function start(buf)
       local filetype = vim.bo[buf].filetype
