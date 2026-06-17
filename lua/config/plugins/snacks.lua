@@ -73,6 +73,24 @@ return {
       desc = 'Find help tags',
     },
     {
+      '<leader>fr',
+      function()
+        local cwd = Snacks.git.get_root() or vim.fn.getcwd(0)
+        Snacks.picker.recent {
+          cwd = cwd,
+          filter = { cwd = true },
+        }
+      end,
+      desc = 'Recent project files',
+    },
+    {
+      '<leader>fR',
+      function()
+        Snacks.picker.recent()
+      end,
+      desc = 'Recent files',
+    },
+    {
       '<leader>fg',
       function()
         Snacks.picker.grep()

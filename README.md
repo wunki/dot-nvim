@@ -61,42 +61,92 @@ Plugins install automatically on first launch. Treesitter parsers download in th
 
 ## Dependencies
 
-Language servers and formatters are installed globally, not managed by Neovim. The config skips any server whose binary isn't in your PATH, so install only what you need.
+Language servers, formatters, and supporting CLI tools are installed globally, not managed by Neovim. The config skips any language server whose binary isn't in your PATH, so install only what you use.
+
+### Linux quick setup
+
+On Ubuntu or another Linux box with `apt`, `npm`, `cargo`, Go, Rust, and mise available, this covers the core tools used by the config plus the optional Snacks extras:
+
+```bash
+sudo apt update
+sudo apt install imagemagick sqlite3 lazygit fish
+
+npm install -g tree-sitter-cli @mermaid-js/mermaid-cli @oxlint/oxlint oxfmt typescript-language-server svelte-language-server
+
+cargo install stylua-cli
+
+go install golang.org/x/tools/gopls@latest
+go install golang.org/x/tools/cmd/goimports@latest
+
+rustup component add rust-analyzer rustfmt
+
+mise use -g lua-language-server@latest
+mise reshim
+```
+
+If mise cannot resolve `lua-language-server`, use the registry-backed name:
+
+```bash
+mise use -g aqua:LuaLS/lua-language-server@latest
+mise reshim
+```
+
+Ubuntu's `tree-sitter` package can lag behind what `nvim-treesitter` expects, so prefer the npm `tree-sitter-cli` package. After upgrading it, rebuild parsers once:
+
+```vim
+:TSUpdate
+```
+
+Verify what Neovim will see:
+
+```bash
+tree-sitter --version
+command -v lua-language-server magick sqlite3 mmdc stylua oxfmt oxlint lazygit
+```
+
+Then run:
+
+```vim
+:checkhealth nvim-treesitter
+:checkhealth vim.treesitter
+:checkhealth snacks
+:checkhealth vim.lsp
+```
 
 ### Language servers
 
 | Server                       | Languages  | Install                                                |
 | ---------------------------- | ---------- | ------------------------------------------------------ |
-| `lua-language-server`        | Lua        | `brew install lua-language-server`                     |
+| `lua-language-server`        | Lua        | `mise use -g lua-language-server@latest`               |
 | `typescript-language-server` | JS/TS      | `npm install -g typescript-language-server typescript` |
 | `svelte-language-server`     | Svelte     | `npm install -g svelte-language-server`                |
-| `biome`                      | JS/TS/JSON | `npm install -g @biomejs/biome`                        |
-| `clangd`                     | C/C++      | `brew install llvm` or `xcode-select --install`        |
+| `oxlint`                     | JS/TS      | `npm install -g @oxlint/oxlint`                        |
+| `clangd`                     | C/C++      | `sudo apt install clangd`                              |
 | `gopls`                      | Go         | `go install golang.org/x/tools/gopls@latest`           |
 | `rust-analyzer`              | Rust       | `rustup component add rust-analyzer`                   |
-| `clojure-lsp`                | Clojure    | `brew install clojure-lsp/brew/clojure-lsp-native`     |
+| `clojure-lsp`                | Clojure    | See https://clojure-lsp.io/installation/               |
+| `expert`                     | Elixir     | See https://github.com/elixir-lang/expert              |
 
 ### Formatters
 
-| Formatter     | Languages                            | Install                                              |
-| ------------- | ------------------------------------ | ---------------------------------------------------- |
-| `stylua`      | Lua                                  | `brew install stylua`                                |
-| `prettierd`   | JS/TS/HTML/JSON/YAML/Markdown/Svelte | `npm install -g @fsouza/prettierd`                   |
-| `goimports`   | Go                                   | `go install golang.org/x/tools/cmd/goimports@latest` |
-| `rustfmt`     | Rust                                 | `rustup component add rustfmt`                       |
-| `fish_indent` | Fish                                 | Included with Fish shell                             |
-
-For Svelte formatting with Prettier:
-
-```bash
-npm install -g prettier-plugin-svelte
-```
+| Formatter     | Languages                                | Install                                              |
+| ------------- | ---------------------------------------- | ---------------------------------------------------- |
+| `stylua`      | Lua                                      | `cargo install stylua-cli`                           |
+| `oxfmt`       | JS/TS/JSON/YAML/Markdown/HTML/CSS/Svelte | `npm install -g oxfmt`                               |
+| `goimports`   | Go                                       | `go install golang.org/x/tools/cmd/goimports@latest` |
+| `gofmt`       | Go                                       | Included with Go                                     |
+| `rustfmt`     | Rust                                     | `rustup component add rustfmt`                       |
+| `fish_indent` | Fish                                     | Included with Fish shell                             |
 
 ### Other tools
 
-| Tool      | Purpose                            | Install                |
-| --------- | ---------------------------------- | ---------------------- |
-| `lazygit` | Git TUI (opened with `<leader>gg`) | `brew install lazygit` |
+| Tool          | Purpose                                     | Install                                |
+| ------------- | ------------------------------------------- | -------------------------------------- |
+| `tree-sitter` | Parser compilation for `nvim-treesitter`    | `npm install -g tree-sitter-cli`       |
+| `lazygit`     | Git TUI (opened with `<leader>gg`)          | `sudo apt install lazygit`             |
+| `magick`      | Snacks image conversion and richer previews | `sudo apt install imagemagick`         |
+| `mmdc`        | Mermaid diagram rendering in docs/markdown  | `npm install -g @mermaid-js/mermaid-cli` |
+| `sqlite3`     | Snacks picker frecency/history database     | `sudo apt install sqlite3`             |
 
 ## Keybindings
 
@@ -115,6 +165,8 @@ Keybindings are discoverable at runtime: press `<leader>` and wait for the which
 | `<leader>fc` | Find Neovim config files                  |
 | `<leader>fd` | Find dotfiles                             |
 | `<leader>fh` | Search help tags                          |
+| `<leader>fr` | Recent files in current project           |
+| `<leader>fR` | Recent files across all projects          |
 | `<leader>fT` | Find TODO comments                        |
 | `<C-b>`      | Toggle file explorer at current file      |
 | `<leader>fm` | File explorer at working directory        |
