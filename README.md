@@ -30,7 +30,7 @@ lua/config/
     snacks.lua                  Fuzzy finder, git browse, lazygit, zen mode
     harpoon.lua                 Quick file switching (with Snacks picker integration)
     mini.lua                    Statusline, file explorer, pairs, surround, textobjects
-    colorscheme.lua             Gondolin (dark) + Melange (light), auto-switching
+    colorscheme.lua             Gondolin (dark) + Rose Pine Dawn (light), auto-switching
     gitsigns.lua                Git change indicators in the sign column
     which-key.lua               Keybinding discovery popup
     claudecode.lua              Claude Code terminal integration
@@ -71,7 +71,15 @@ On Ubuntu or another Linux box with `apt`, `npm`, `cargo`, Go, Rust, and mise av
 sudo apt update
 sudo apt install imagemagick sqlite3 lazygit fish
 
-npm install -g tree-sitter-cli @mermaid-js/mermaid-cli @oxlint/oxlint oxfmt typescript-language-server svelte-language-server
+mise use -g \
+  lua-language-server@latest \
+  'npm:tree-sitter-cli@latest' \
+  'npm:@mermaid-js/mermaid-cli@latest' \
+  'npm:oxlint@latest' \
+  'npm:oxfmt@latest' \
+  'npm:vscode-langservers-extracted@latest' \
+  'npm:typescript-language-server@latest' \
+  'npm:svelte-language-server@latest'
 
 cargo install stylua-cli
 
@@ -80,9 +88,11 @@ go install golang.org/x/tools/cmd/goimports@latest
 
 rustup component add rust-analyzer rustfmt
 
-mise use -g lua-language-server@latest
+mise install
 mise reshim
 ```
+
+Mise's Node default package files are deprecated. For npm CLIs, declare them directly with the npm backend (`npm:package-name`) so they are tracked as mise-managed tools instead of hidden global packages under a particular Node install.
 
 If mise cannot resolve `lua-language-server`, use the registry-backed name:
 
@@ -118,9 +128,10 @@ Then run:
 | Server                       | Languages  | Install                                                |
 | ---------------------------- | ---------- | ------------------------------------------------------ |
 | `lua-language-server`        | Lua        | `mise use -g lua-language-server@latest`               |
-| `typescript-language-server` | JS/TS      | `npm install -g typescript-language-server typescript` |
-| `svelte-language-server`     | Svelte     | `npm install -g svelte-language-server`                |
-| `oxlint`                     | JS/TS      | `npm install -g @oxlint/oxlint`                        |
+| `vscode-json-language-server` | JSON/JSONC | `mise use -g npm:vscode-langservers-extracted@latest`  |
+| `typescript-language-server` | JS/TS      | `mise use -g npm:typescript-language-server@latest`    |
+| `svelte-language-server`     | Svelte     | `mise use -g npm:svelte-language-server@latest`        |
+| `oxlint`                     | JS/TS      | `mise use -g npm:oxlint@latest`                        |
 | `clangd`                     | C/C++      | `sudo apt install clangd`                              |
 | `gopls`                      | Go         | `go install golang.org/x/tools/gopls@latest`           |
 | `rust-analyzer`              | Rust       | `rustup component add rust-analyzer`                   |
@@ -132,7 +143,7 @@ Then run:
 | Formatter     | Languages                                | Install                                              |
 | ------------- | ---------------------------------------- | ---------------------------------------------------- |
 | `stylua`      | Lua                                      | `cargo install stylua-cli`                           |
-| `oxfmt`       | JS/TS/JSON/YAML/Markdown/HTML/CSS/Svelte | `npm install -g oxfmt`                               |
+| `oxfmt`       | JS/TS/JSON/YAML/Markdown/HTML/CSS/Svelte | `mise use -g npm:oxfmt@latest`                       |
 | `goimports`   | Go                                       | `go install golang.org/x/tools/cmd/goimports@latest` |
 | `gofmt`       | Go                                       | Included with Go                                     |
 | `rustfmt`     | Rust                                     | `rustup component add rustfmt`                       |
@@ -142,10 +153,10 @@ Then run:
 
 | Tool          | Purpose                                     | Install                                |
 | ------------- | ------------------------------------------- | -------------------------------------- |
-| `tree-sitter` | Parser compilation for `nvim-treesitter`    | `npm install -g tree-sitter-cli`       |
+| `tree-sitter` | Parser compilation for `nvim-treesitter`    | `mise use -g npm:tree-sitter-cli@latest` |
 | `lazygit`     | Git TUI (opened with `<leader>gg`)          | `sudo apt install lazygit`             |
 | `magick`      | Snacks image conversion and richer previews | `sudo apt install imagemagick`         |
-| `mmdc`        | Mermaid diagram rendering in docs/markdown  | `npm install -g @mermaid-js/mermaid-cli` |
+| `mmdc`        | Mermaid diagram rendering in docs/markdown  | `mise use -g 'npm:@mermaid-js/mermaid-cli@latest'` |
 | `sqlite3`     | Snacks picker frecency/history database     | `sudo apt install sqlite3`             |
 
 ## Keybindings

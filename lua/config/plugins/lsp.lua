@@ -80,6 +80,16 @@ return {
           filetypes = { 'lua' },
           root_markers = { '.luarc.json', '.luarc.jsonc', '.stylua.toml', 'stylua.toml', '.git' },
         },
+        jsonls = {
+          cmd = { 'vscode-json-language-server', '--stdio' },
+          filetypes = { 'json', 'jsonc' },
+          root_markers = { '.git' },
+          settings = {
+            json = {
+              validate = { enable = true },
+            },
+          },
+        },
         oxlint = oxlint,
         ts_ls = {
           cmd = { 'typescript-language-server', '--stdio' },
@@ -101,6 +111,11 @@ return {
           filetypes = { 'rust' },
           root_markers = { 'Cargo.toml', 'rust-project.json', '.git' },
         },
+        zls = {
+          cmd = { 'zls' },
+          filetypes = { 'zig', 'zon' },
+          root_markers = { 'build.zig', 'build.zig.zon', '.git' },
+        },
         svelte = {
           cmd = { 'svelteserver', '--stdio' },
           filetypes = { 'svelte' },
@@ -110,6 +125,11 @@ return {
           cmd = { 'clojure-lsp' },
           filetypes = { 'clojure', 'edn' },
           root_markers = { 'project.clj', 'deps.edn', 'build.boot', 'shadow-cljs.edn', 'bb.edn', '.git' },
+        },
+        ols = {
+          cmd = { 'ols' },
+          filetypes = { 'odin' },
+          root_markers = { 'ols.json', 'odinfmt.json', '.git' },
         },
         expert = {
           cmd = {

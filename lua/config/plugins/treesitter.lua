@@ -26,6 +26,9 @@ local filetypes = {
   'astro',
   'svelte',
   'clojure',
+  'odin',
+  'zig',
+  'zon',
 }
 
 local enabled_filetypes = {} ---@type table<string, boolean>
@@ -66,6 +69,8 @@ return {
       'astro',
       'svelte',
       'clojure',
+      'odin',
+      'zig',
       'vimdoc',
     }
     local installed = require('nvim-treesitter.config').get_installed()
@@ -83,6 +88,7 @@ return {
     local treesitter = require 'nvim-treesitter'
     treesitter.setup()
     vim.treesitter.language.register('json', 'jsonc')
+    vim.treesitter.language.register('zig', 'zon')
 
     local function start(buf)
       local filetype = vim.bo[buf].filetype
