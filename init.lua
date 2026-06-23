@@ -19,6 +19,7 @@ vim.schedule(function()
 end)
 
 -- configure how new splits should be opened
+vim.opt.winborder = 'rounded'
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 

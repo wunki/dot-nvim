@@ -134,7 +134,7 @@ return {
         expert = {
           cmd = {
             (function()
-              return vim.fn.expand '~/.local/bin/expert'
+              return vim.fn.expand '~/.local/bin/expert_darwin_arm64'
             end)(),
             '--stdio',
           },
@@ -161,6 +161,13 @@ return {
             mode = mode or 'n'
             vim.keymap.set(mode, keys, func, { buffer = args.buf, desc = 'LSP: ' .. desc })
           end
+
+          map('K', function()
+            vim.lsp.buf.hover { border = 'rounded' }
+          end, 'Hover documentation')
+          map('<C-s>', function()
+            vim.lsp.buf.signature_help { border = 'rounded' }
+          end, 'Signature help', { 'i', 'n' })
 
           -- gd via Snacks picker for preview support
           map('gd', function()
