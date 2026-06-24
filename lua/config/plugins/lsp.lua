@@ -134,7 +134,7 @@ return {
         expert = {
           cmd = {
             (function()
-              return vim.fn.expand '~/.local/bin/expert_darwin_arm64'
+              return vim.fn.expand '~/.local/bin/expert'
             end)(),
             '--stdio',
           },

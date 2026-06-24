@@ -33,26 +33,66 @@ return {
       },
     },
     config = function()
+      require('mini.diff').setup {
+        view = {
+          style = 'sign',
+          signs = { add = '┃', change = '┃', delete = '▁' },
+        },
+      }
+
+      local function set_minidiff_highlights()
+        vim.api.nvim_set_hl(0, 'MiniDiffSignAdd', { link = 'Added' })
+        vim.api.nvim_set_hl(0, 'MiniDiffSignChange', { link = 'Changed' })
+        vim.api.nvim_set_hl(0, 'MiniDiffSignDelete', { link = 'Removed' })
+      end
+      set_minidiff_highlights()
+      vim.api.nvim_create_autocmd('ColorScheme', {
+        group = vim.api.nvim_create_augroup('petar-minidiff-highlights', { clear = true }),
+        callback = set_minidiff_highlights,
+      })
+
+      require('mini.git').setup()
+
+      local miniclue = require 'mini.clue'
+      miniclue.setup {
+        triggers = {
+          { mode = { 'n', 'x' }, keys = '<Leader>' },
+        },
+        clues = {
+          { mode = { 'n', 'x' }, keys = '<Leader>a', desc = 'AI' },
+          { mode = { 'n', 'x' }, keys = '<Leader>f', desc = 'Find' },
+          { mode = { 'n', 'x' }, keys = '<Leader>g', desc = 'Git' },
+          { mode = { 'n', 'x' }, keys = '<Leader>h', desc = 'Harpoon' },
+          { mode = { 'n', 'x' }, keys = '<Leader>l', desc = 'LSP' },
+          { mode = { 'n', 'x' }, keys = '<Leader>o', desc = 'Opencode' },
+          { mode = { 'n', 'x' }, keys = '<Leader>u', desc = 'UI' },
+        },
+        window = {
+          delay = 300,
+        },
+      }
+
       local statusline = require 'mini.statusline'
       statusline.setup {
         use_icons = false,
         content = {
           active = function()
-            local branch = vim.b.gitsigns_head or ''
+            local git = vim.b.minigit_summary or {}
+            local branch = git.head_name or ''
             local diff = (function()
-              local status = vim.b.gitsigns_status_dict
-              if not status then
+              local status = vim.b.minidiff_summary
+              if not status or not status.add then
                 return ''
               end
               local parts = {}
-              if (status.added or 0) > 0 then
-                table.insert(parts, '%#diffAdded#+' .. status.added .. '%*')
+              if (status.add or 0) > 0 then
+                table.insert(parts, '%#diffAdded#+' .. status.add .. '%*')
               end
-              if (status.changed or 0) > 0 then
-                table.insert(parts, '%#DiagnosticWarn#~' .. status.changed .. '%*')
+              if (status.change or 0) > 0 then
+                table.insert(parts, '%#DiagnosticWarn#~' .. status.change .. '%*')
               end
-              if (status.removed or 0) > 0 then
-                table.insert(parts, '%#diffRemoved#-' .. status.removed .. '%*')
+              if (status.delete or 0) > 0 then
+                table.insert(parts, '%#diffRemoved#-' .. status.delete .. '%*')
               end
               return table.concat(parts, ' ')
             end)()
