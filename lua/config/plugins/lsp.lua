@@ -37,21 +37,32 @@ return {
         'package.json',
       }
 
-      local function oxlint_executable(root_dir)
-        if root_dir then
-          local local_cmd = vim.fs.joinpath(root_dir, 'node_modules', '.bin', 'oxlint')
-          if vim.fn.executable(local_cmd) == 1 then
-            return local_cmd
+      -- Resolve a node CLI: project-local node_modules/.bin first, then the
+      -- global binary (skipped when local_only -- e.g. oxfmt needs the local
+      -- install to resolve a project's svelte/compiler).
+      local function node_bin(name)
+        return function(root_dir, local_only)
+          if root_dir then
+            local local_cmd = vim.fs.joinpath(root_dir, 'node_modules', '.bin', name)
+            if vim.fn.executable(local_cmd) == 1 then
+              return local_cmd
+            end
           end
-        end
 
-        local global_cmd = vim.fn.exepath 'oxlint'
-        if global_cmd ~= '' then
-          return global_cmd
-        end
+          if local_only then
+            return nil
+          end
 
-        return nil
+          local global_cmd = vim.fn.exepath(name)
+          if global_cmd ~= '' then
+            return global_cmd
+          end
+
+          return nil
+        end
       end
+
+      local oxlint_executable = node_bin 'oxlint'
 
       local oxlint = {
         cmd = function(dispatchers, config)
@@ -73,6 +84,46 @@ return {
         },
       }
 
+      -- oxfmt as a long-running LSP formatter (warm server, no per-save startup
+      -- cost) for every filetype oxfmt handles. Resolves a project-local oxfmt
+      -- first, falling back to the global binary -- except for Svelte: `.svelte`
+      -- formatting needs the project-local oxfmt to resolve the project's
+      -- `svelte/compiler`, and must be enabled via `fmt: { svelte: {} }` in the
+      -- vite/oxfmt config. conform prefers this client over the oxfmt CLI.
+      local oxfmt_filetypes = {
+        'javascript',
+        'javascriptreact',
+        'typescript',
+        'typescriptreact',
+        'json',
+        'jsonc',
+        'yaml',
+        'markdown',
+        'html',
+        'css',
+        'scss',
+        'less',
+        'svelte',
+      }
+
+      local oxfmt_executable = node_bin 'oxfmt'
+
+      local oxfmt = {
+        cmd = function(dispatchers, config)
+          local cmd = assert(oxfmt_executable(config.root_dir, false), 'oxfmt executable not found')
+          return vim.lsp.rpc.start({ cmd, '--lsp' }, dispatchers, { cwd = config.root_dir })
+        end,
+        root_dir = function(bufnr, on_dir)
+          local root_dir = vim.fs.root(bufnr, vite_plus_root_markers)
+          -- Svelte needs a project-local oxfmt; other filetypes can use the global one.
+          local local_only = vim.bo[bufnr].filetype == 'svelte'
+          if root_dir and oxfmt_executable(root_dir, local_only) then
+            on_dir(root_dir)
+          end
+        end,
+        filetypes = oxfmt_filetypes,
+      }
+
       -- LSP server configurations
       local servers = {
         lua_ls = {
@@ -91,6 +142,7 @@ return {
           },
         },
         oxlint = oxlint,
+        oxfmt = oxfmt,
         ts_ls = {
           cmd = { 'typescript-language-server', '--stdio' },
           filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
