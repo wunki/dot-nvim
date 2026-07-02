@@ -9,11 +9,11 @@ Most Neovim configurations fall into two camps: starter kits that hide complexit
 A few things it does that might save you time:
 
 - **Native LSP, no wrapper plugin.** Language servers are configured with `vim.lsp.config()` and `vim.lsp.enable()` directly. Servers that aren't installed get skipped without errors. You can read the setup in one file and understand what's happening.
-- **AI coding assistant integration.** Auto-refreshes buffers when files change on disk (for when Claude Code or similar tools edit files outside Neovim), plus dedicated keybindings for Claude Code and OpenCode.
+- **AI coding assistant integration.** Auto-refreshes buffers when files change on disk (for when OpenCode or similar tools edit files outside Neovim), plus dedicated keybindings for OpenCode.
 - **Auto dark/light mode on macOS.** Follows your system appearance setting and switches colorschemes automatically.
 - **Completion on demand.** The completion menu stays hidden until you summon it with `<C-Space>`. No popups while you think.
 
-The config is around 600 lines of Lua across 17 files. You can fork the whole thing as a starter, or pull individual files into your own setup.
+The config is around 600 lines of Lua across 16 files. You can fork the whole thing as a starter, or pull individual files into your own setup.
 
 ## Structure
 
@@ -33,7 +33,6 @@ lua/config/
     colorscheme.lua             Gondolin (dark) + Rose Pine Dawn (light), auto-switching
     gitsigns.lua                Git change indicators in the sign column
     which-key.lua               Keybinding discovery popup
-    claudecode.lua              Claude Code terminal integration
     opencode.lua                OpenCode AI assistant
     clojure.lua                 Conjure REPL, paredit, rainbow delimiters
     markdown.lua                Rendered markdown preview in-buffer
@@ -218,9 +217,6 @@ Keybindings are discoverable at runtime: press `<leader>` and wait for the which
 
 | Key          | Action                               |
 | ------------ | ------------------------------------ |
-| `<leader>ac` | Toggle Claude Code terminal          |
-| `<leader>as` | Send selection to Claude (visual)    |
-| `<leader>ab` | Add current buffer to Claude context |
 | `<leader>oo` | Toggle OpenCode                      |
 | `<leader>oa` | Ask OpenCode about current file      |
 | `<leader>os` | Select OpenCode action               |

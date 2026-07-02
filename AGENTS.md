@@ -20,7 +20,6 @@ This is a personal Neovim configuration written in Lua, using lazy.nvim as the p
 │   ├── lazy.lua                # Plugin manager bootstrap and setup
 │   ├── keybindings.lua         # Global keybinding definitions
 │   └── plugins/                # Individual plugin configurations
-│       ├── claudecode.lua
 │       ├── clojure.lua
 │       ├── colorscheme.lua
 │       ├── completion.lua      # blink.cmp
